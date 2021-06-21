@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>membership</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Name</ion-label>
+    <ion-input autocomplete="new-password" type="text" [(ngModel)]="userData.name" readonly></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input autocomplete="new-password" type="email" [(ngModel)]="userData.email" readonly></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">phone</ion-label>
+    <ion-input autocomplete="new-password" type="text" [(ngModel)]="userData.phone" readonly></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Address</ion-label>
+    <ion-input autocomplete="new-password" type="text" [(ngModel)]="userData.address" readonly></ion-input>
+  </ion-item>
+  <ion-item  >
+    
+    <ion-label>When checked, you accept terms & Conditions and you should Pay <strong>10$</strong> as subscription Fees.</ion-label>
+    <ion-checkbox slot="start" [(ngModel)]="userData.accepted"></ion-checkbox>
+  </ion-item>
+  
+<ion-button (click)="onclicklog()" disabled={{subdisabled}} class="log" fill="outline" expand="block">Subscribe</ion-button>
+
+</ion-content>

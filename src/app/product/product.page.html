@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary"> <ion-button (click)="navtoadd()" slot="end" size="small" ><ion-icon name="add" color="warning"></ion-icon> </ion-button>
+    <ion-buttons slot="start">
+            <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+          </ion-buttons>
+   <div text-center><ion-title>product</ion-title></div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid >
+    <ion-row>
+        <ion-col *ngFor="let item of product; let i = index;" size="6" no-padding >
+         <ion-card no-padding>
+             <ion-button class="buttonRight" size="small" (click)="deleteproduct(i)">
+                 <ion-icon name="trash"></ion-icon>
+             </ion-button>
+             <ion-button class="buttonLeft" size="small" (click)="openProduct(i)">
+                 <ion-icon name="create"></ion-icon>
+             </ion-button>
+             <ion-img class="img" [src]="item.product_image"  draggable="false"></ion-img>
+             <ion-card-content> 
+                      <h6 align="center" style="font-weight: bold;">{{item.product_name}}</h6>
+                   
+             </ion-card-content>
+         </ion-card>
+         </ion-col>
+
+     </ion-row>
+ </ion-grid>
+</ion-content>

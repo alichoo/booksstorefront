@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary"> <ion-button (click)="navtoadd()" slot="end" size="small" ><ion-icon name="add" color="warning"></ion-icon> </ion-button>
+   <div text-center><ion-title>slides</ion-title></div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid >
+    <ion-row>
+        <ion-col *ngFor="let item of slide; let i = index;" size="12" no-padding >
+         <ion-card no-padding>
+             <ion-button class="buttonRight" size="small" (click)="deleteitem(i)" >
+                 <ion-icon name="trash"></ion-icon>
+             </ion-button>
+             <ion-img class="img" [src]="item.imagepath"  draggable="false"></ion-img>
+             <ion-card-content> 
+               <div text-center>
+                      <ion-button color="primary">edit</ion-button>
+                    </div>
+             </ion-card-content>
+         </ion-card>
+         </ion-col>
+
+     </ion-row>
+ </ion-grid>
+</ion-content>

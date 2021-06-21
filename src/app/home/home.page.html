@@ -1,0 +1,111 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color='whait' >
+
+    <div text-center>
+      <ion-title></ion-title>
+    </div>
+
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="../../assets/menu_bar.svg" />
+      </ion-menu-button>
+    </ion-buttons>
+      
+    <ion-buttons slot="start">
+        <img src="../../assets/logoo.png" style="height: 40px; margin-left: 85px;">
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="slides">
+
+  <!--  search -->
+
+  <div class="search ion-padding">
+    <ion-item lines="none">
+      <ion-input placeholder="Search Your Product"  [(ngModel)]="ProductData.product_name" (ionChange)="onSearchChange($event)" debounce="500" type="text"></ion-input>
+      <ion-icon ios="ios-search" md="md-search" slot="end"></ion-icon>
+    </ion-item>
+  </div>
+
+  <ion-list *ngIf="ProductData.product_name !== ''">
+    <ion-item *ngFor="let item of search;" (click)="openProduct(item.product_id,item.product_name)">
+      {{item.product_name}}
+    </ion-item>
+  </ion-list>
+
+<!--  fab-button -->
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="chatboxes"></ion-icon>
+    </ion-fab-button>
+    
+
+    <ion-fab-list side="top">
+      <ion-fab-button color="twitter" (click)="navtofb()">
+        <ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="danger" (click)="navtoinsta()">
+        <ion-icon name="logo-instagram"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <!--  slides -->
+
+  <ion-slides pager="true" effect="cube" [options]="slideOpts">
+    <ion-slide *ngFor="let item of slide">
+      <ion-img [src]="item.imagepath"></ion-img>
+    </ion-slide>
+  </ion-slides>
+
+<!--  Categories -->
+
+<hr>
+
+
+<div class="title ion-padding">
+  <h2 class="font-bold">Categories</h2>
+</div>
+
+
+  <div class="category-slider ion-padding-start">
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let item of categories; let i = index;" size="4" (click)="openCategory(i)">
+        <ion-col>
+          <h4 class="nameCat">{{item.cat_name}}</h4>
+          <img [src]="item.cat_image"/>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+
+<!--  New Arrivals -->
+
+  <div class="title ion-padding">
+    <h2 class="font-bold">New Arrivals</h2>
+    <p>See all</p>
+  </div>
+
+  <div class="product-slider ion-padding-start">
+    
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let item of product; let i = index;">
+        
+        <ion-col>
+          <ion-button [color]="item.wishflag=='1'? 'warning' : 'primary'" class="buttonRight" size="small" (click)="addToWish(item.product_id,i,false)">
+            <ion-icon [color]="item.wishflag=='1'? 'primary' : 'warning'" name="heart"></ion-icon>
+          </ion-button>
+          <img (click)="openproduct2(i)" [src]="item.product_image"/>
+          <p>RM{{item.product_price}}</p>
+          <h6>{{item.product_name}}</h6>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+</ion-content>

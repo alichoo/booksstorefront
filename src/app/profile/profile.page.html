@@ -1,0 +1,106 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+        <div text-center>
+            <ion-title>Profile</ion-title>
+        </div>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="update_user()">
+                <ion-icon name="save"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+
+    <!-- <ion-row style="background-color: var(--ion-color-primary);">
+        <ion-col size="3" style="display: flex;justify-content: center;align-items: center;" (click)="editProfile()">
+            <img (error)="updateUrl()" [src]="lastImage" style="border-radius: 50%; border: 5px white solid;" />
+        </ion-col>
+        <ion-col size="7" (click)="editProfile()">
+            <p class="cut-text" style="text-transform: capitalize;color: var(--ion-color-warning); ">{{userData.name}}</p>
+            <p class="cut-text" style="color: var(--ion-color-warning);">{{userData.email}}</p>
+        </ion-col>
+        <ion-col size="2">
+            <ion-button size="small" color="warning" fill="clear" (click)="logout()" style="height: 100%; display: block; "
+                no-padding>
+                <ion-icon name="log-out" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+     -->
+</ion-header>
+
+<ion-content padding>
+    <ion-row class="transitem">
+        <ion-col class="rounded">
+            <img (error)="updateUrl()" [src]="lastImage" style="width: 40%;margin:auto;display:block;"/>
+        </ion-col>
+    </ion-row>
+    <div style="display: block;" text-center>
+        <ion-button (click)="presentActionSheet()" size="small" color="primary" shape="round" style="margin:auto;">
+            Upload your image
+        </ion-button>
+    </div>
+
+
+    <ion-list no-lines>
+        <ion-item>
+            <ion-label position="floating">
+                <ion-icon name="person"></ion-icon> Full Name
+            </ion-label>
+            <ion-input type="text" [(ngModel)]="userData.name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">
+                <ion-icon name="md-mail"></ion-icon> Email
+            </ion-label>
+            <ion-input readonly autocomplete="new-password" type="email" [(ngModel)]="userData.email"></ion-input>
+        </ion-item>
+        <ion-row>
+            <ion-col size="3">
+                <ion-item>
+                    <ion-label position="floating">Country Code</ion-label>
+                    <ion-input autocomplete="new-password" type="tel" [(ngModel)]="userData.code"> </ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="9">
+                <ion-item>
+                    <ion-label position="floating">
+                        <ion-icon name="md-call"></ion-icon> Phone Number
+                    </ion-label>
+                    <ion-input autocomplete="new-password" type="tel" [(ngModel)]="userData.phone"> </ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-item>
+            <ion-label position="stacked">
+                <ion-icon name="md-pin"></ion-icon> Address
+            </ion-label>
+            <ion-textarea autocomplete="new-password" [(ngModel)]="userData.address"></ion-textarea>
+        </ion-item>
+        <ion-row>
+            <ion-col size="4">
+                <ion-item>
+                    <ion-label position="floating">Zip Code</ion-label>
+                    <ion-input autocomplete="new-password" [(ngModel)]="userData.zip" type="number"> </ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="4">
+                <ion-item>
+                    <ion-label position="floating">City</ion-label>
+                    <ion-input autocomplete="new-password" [(ngModel)]="userData.city" type="text"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="4">
+                <ion-item>
+                    <ion-label position="floating">Country</ion-label>
+                    <ion-input autocomplete="new-password" [(ngModel)]="userData.country" type="text"> </ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+</ion-content>
+<ion-footer style="background-color: white;">
+    <ion-button (click)="logout()" color='primary' expand="block">Logout</ion-button>
+</ion-footer> 

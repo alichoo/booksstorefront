@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+        </ion-buttons>
+    <div text-center>
+    <ion-title>AddSlide</ion-title>
+  </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div  text-center>
+        <ion-title>slide</ion-title>
+      
+    <img *ngIf="!base64Image" src="assets/no-image-icon-15.png"/>
+    <img *ngIf="base64Image" [src]="base64Image"/>
+    
+    
+    <ion-item>
+      <ion-button size="small" (click)="camphoto()">camera</ion-button>
+      <ion-button size="small" (click)="getimage()">gallery</ion-button>
+      </ion-item> 
+    </div>
+      <ion-item >
+          <ion-label position="floating" >slide name</ion-label>
+          <ion-input type="text" [(ngModel)]="slideData.name" ></ion-input>
+          </ion-item>
+        <ion-button expand="full" (click)="addslide()" (click)="uploadImage()">add slide </ion-button>
+</ion-content>

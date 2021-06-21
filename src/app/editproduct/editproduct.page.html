@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <div text-center>
+      <ion-title>{{ProductData.product_name}}</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <img *ngIf="!base64Image" src="{{ProductData.product_image}}" />
+  <img *ngIf="base64Image" [src]="base64Image" />
+  <ion-item>
+    <ion-button size="small" (click)="camphoto()">camera</ion-button>
+    <ion-button size="small" (click)="getimage()">gallery</ion-button>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label position="floating">Product Name</ion-label>
+    <ion-input type="text" [(ngModel)]="ProductData.product_name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Product Category</ion-label>
+    <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="cat_id($event)">
+      <ion-select-option [(ngModel)]="ProductData.cat_id" *ngFor="let item of categories" value="{{item.cat_id}}">{{item.cat_name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Product Price</ion-label>
+    <ion-input type="text" [(ngModel)]="ProductData.product_price"></ion-input>
+  </ion-item>
+
+
+  
+
+  <ion-item>
+    <ion-label position="floating">Product description</ion-label>
+    <ion-textarea type="text" [(ngModel)]="ProductData.product_description"></ion-textarea>
+  </ion-item>
+
+  <ion-button padding shape="round" expand="full" (click)="update_prod()" (click)="uploadImage()">update product data</ion-button>
+</ion-content>

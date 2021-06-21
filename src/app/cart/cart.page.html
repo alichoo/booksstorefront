@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <div text-center>
+      <ion-title>Cart</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+
+
+
+
+
+<ion-content fullscreen="true">
+
+  <div class="divnoreq" *ngIf="!CartItem.length">
+    <p class="textinp">No Product on your Cart.</p>
+  </div>
+
+  <div class="cart-items">
+    <ion-card mode="ios" *ngFor="let item of CartItem; let i = index">
+      <ion-card-content>
+        <div class="item-img">
+          <img style="border-radius: 5vw; " [src]="item.product_image" />
+        </div>
+
+        <div class="item-info">
+          <p>{{item.product_name}}</p>
+          <p>Lotto.LTD</p>
+          <p>{{item.price_all_qty}} RM</p>
+
+          <div class="qty-selector">
+            <ion-button fill="clear" (click)="minQty(i)">-</ion-button>
+            <ion-label>{{item.product_qty}}</ion-label>
+            <ion-button fill="clear" (click)="addQty(i)">+</ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+
+      <ion-button size="small" color="primary" fill="clear" (click)="deleteitem(i)" class="floatingDel">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-card>
+
+  </div>
+
+
+ 
+
+
+</ion-content>
+
+
+
+<ion-footer translucent="true" class="ion-no-border" mode="md">
+
+  <ion-button expand="block" class="main-button" routerLink="/checkout" routerDirection="forward"
+    >{{orderTotal}} RM</ion-button>
+
+</ion-footer>
+
+
+
+<!-- <ion-content>
+     <ion-grid>
+    <ion-row *ngFor="let item of CartItem; let i = index" color="primary" class="hi">
+      <ion-col size="3" style=" display: flex;
+      justify-content: center;
+      align-items: center;">
+        <img style="border-radius: 5vw; " [src]="item.product_image" />
+      </ion-col>
+      <ion-col size="7">
+        <h4 style="text-transform: capitalize;"> {{item.product_name}}</h4>
+        <h6 style="font-weight: bold; color: var(--ion-color-primary);">{{item.price_all_qty}} EGP</h6>
+      </ion-col>
+      <ion-col size="2" class="ion-align-self-center" no-padding>
+        <ion-row no-padding>
+          <ion-button size="small" color="primary" fill="clear" (click)="addQty(i)" no-padding>
+            <ion-icon name="add-circle" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-row>
+        <ion-row>
+          <p style="width: 100%; margin: 0px; margin-left: 15%;">{{item.product_qty}}</p>
+        </ion-row>
+        <ion-row style="text-align: center;" no-padding>
+          <ion-button size="small" color="primary" fill="clear" (click)="minQty(i)" no-padding>
+            <ion-icon name="remove-circle" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-row>
+
+      </ion-col>
+      <ion-button size="small" color="primary" fill="clear" (click)="deleteitem(i)" class="floatingDel">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+  <ion-fab *ngIf="CartItem.length" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addNote()">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+<ion-footer style="background-color: white;" no-border>
+  <ion-button color="primary" expand="full" (click)="orderConfirmed()">
+    <ion-text slot="start">Confirm Order With {{orderTotal}} EGP</ion-text>
+  </ion-button>
+</ion-footer> -->

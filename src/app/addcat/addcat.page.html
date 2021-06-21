@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+        </ion-buttons>
+    <div  text-center>
+    <ion-title>addcat</ion-title>
+  </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div  text-center>
+        <ion-title>category image</ion-title>
+      </div>
+    <img *ngIf="!base64Image" src="assets/no-image-icon-15.png"/>
+    <img *ngIf="base64Image" [src]="base64Image"/>
+    
+    
+    <ion-item>
+      <ion-button size="small" (click)="camphoto()">camera</ion-button>
+      <ion-button size="small" (click)="getimage()">gallery</ion-button>
+      </ion-item> 
+
+      <ion-item >
+          <ion-label position="floating" >category name</ion-label>
+          <ion-input type="text" [(ngModel)]="catData.cat_name" ></ion-input>
+          </ion-item>
+        <ion-button (click)="addcat()" (click)="uploadImage()">add category </ion-button>
+
+</ion-content>

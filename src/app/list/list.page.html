@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      About Us
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="--ion-background-color:var(--ion-color-warning);">
+
+  <div style="width: 100%; text-align: center;margin-top: 5vw; margin-bottom: 5vw;">
+    <div style="display: flex;object-fit: cover;vertical-align: middle;margin: auto !important; background-color:white;border-radius: 50%; width: 40vw; height: 40vw;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+      <img src="assets/404Gallery.png" alt="404Gallery" style="width: 40vw;">
+    </div>
+  </div>
+  <div style="background-color: var(--ion-color-warning)" padding>
+    <h4 style="text-align: center;text-align: justify;text-justify: inter-word;">
+      {{about.text}}
+    </h4>
+    <div style="margin-top: 10%;">
+      <h4 *ngIf="about.phone || about.address || about.email || about.face || about.insta" >Contact Us</h4>
+      <h6 *ngIf="about.phone">
+        <ion-icon name="call"> </ion-icon>
+        {{about.phone}}
+      </h6>
+      <h6 *ngIf="about.address">
+        <ion-icon name="pin"> </ion-icon>
+        {{about.address}}
+      </h6>
+      <h6 *ngIf="about.email">
+        <ion-icon name="mail"></ion-icon>
+        {{about.email}}
+      </h6>
+      <h6 *ngIf="about.face">
+        <ion-icon name="logo-facebook"> </ion-icon>
+        {{about.face}}
+      </h6>
+      <h6 *ngIf="about.insta">
+        <ion-icon name="logo-instagram"></ion-icon>
+        {{about.insta}}
+      </h6>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,103 @@
+<ion-header>
+    <ion-toolbar color='primary'>
+      <ion-buttons slot="start">
+        <ion-button class="backbtn" routerLink="/welcome" routerDirection="back">
+          <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+
+        </ion-button>
+      </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismiss()">
+                <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <div text-center>
+            <ion-title>Sign Up</ion-title>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="ion-padding container">
+       
+    
+        <div class="form-container">
+          <ion-item>
+            <ion-label position="floating">Name</ion-label>
+            <ion-input autocomplete="new-password" type="text" [(ngModel)]="userData.name"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input autocomplete="new-password" type="email" [(ngModel)]="userData.email"></ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input autocomplete="new-password" type="password" [(ngModel)]="userData.password"></ion-input>
+            <ion-icon name="eye" slot="end"></ion-icon>
+          </ion-item>
+    
+    
+          <ion-row>
+            
+            <ion-col size="3">
+              <ion-item>
+                <ion-label position="floating">Country Code</ion-label>
+                <ion-input autocomplete="new-password" type="tel" [(ngModel)]="userData.code"> </ion-input>
+              </ion-item>
+            </ion-col>
+            
+            <ion-col size="9">
+              <ion-item>
+                <ion-label position="floating">Phone Number</ion-label>
+                <ion-input autocomplete="new-password" type="tel" [(ngModel)]="userData.phone"></ion-input>
+              </ion-item>
+            </ion-col>
+    
+          </ion-row>
+    
+    
+          <ion-item>
+            <ion-label position="floating">address</ion-label>
+            <ion-textarea autocomplete="new-password" [(ngModel)]="userData.address"></ion-textarea>
+          </ion-item>
+    
+    
+          <ion-row>
+    
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">zip</ion-label>
+                <ion-input autocomplete="new-password" [(ngModel)]="userData.zip" type="number"> </ion-input>
+              </ion-item>
+            </ion-col>
+    
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">city</ion-label>
+                <ion-input autocomplete="new-password" [(ngModel)]="userData.city" type="text"></ion-input>
+              </ion-item>
+            </ion-col>
+    
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="floating">country</ion-label>
+                <ion-input autocomplete="new-password" [(ngModel)]="userData.country" type="text"> </ion-input>
+              </ion-item>
+            </ion-col>
+    
+            </ion-row>
+            
+    
+    
+    
+    
+          <ion-button (click)="signup()" type="submit" class="end" expand="block">Sign Up</ion-button>
+    
+          <div class="sign-up">
+            Already have an account? <ion-button color="dark" fill="clear" routerLink="/login" routerDirection="forward">Sign in</ion-button>
+          </div>
+        </div>
+      </div>
+      </ion-content>

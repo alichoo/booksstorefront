@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Favorite</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    
+  <ion-segment mode="md" [(ngModel)]="segValue">
+      <ion-segment-button mode="md" value="wish">
+          <ion-label>My Wishlist</ion-label>
+      </ion-segment-button>
+  </ion-segment>
+  <ion-grid no-padding>
+      <ion-row>
+          <ion-col size="6" no-padding>
+              <ion-row *ngFor="let item of products; let i = index ;let even = even; let odd = odd">
+                  <ion-card *ngIf="odd" no-padding style="margin: 4% !important">
+                      <ion-button [color]=" item.wishflag=='1' ? 'warning' : 'primary'" class="buttonRight" size="small"
+                          (click)="addToWish(item.product_id,i)">
+                          <ion-icon [color]="item.wishflag=='1'? 'primary' : 'warning'" name="heart"></ion-icon>
+                      </ion-button>
+                      <div (click)="openProduct(i)">
+                          <ion-img class="img" [src]="item.product_image" draggable="false"></ion-img>
+                          <ion-card-content no-padding>
+                              <h6 class="color">{{item.product_name}}</h6>
+                              <div style="display: flex;">
+                                  <h6 class="priceproduct" color='primary'>{{item.product_price}} EGP</h6>
+                                  <ion-button style="padding-right: 5%;" size="small" color="primary" fill="clear"
+                                      (click)="addQty(i)" no-padding>
+                                      <ion-icon name="cart" slot="icon-only"></ion-icon>
+                                  </ion-button>
+                              </div>
+                          </ion-card-content>
+                      </div>
+                  </ion-card>
+              </ion-row>
+          </ion-col>
+          <ion-col size="6" no-padding>
+              <ion-row *ngFor="let item of products; let i = index ;let even = even; let odd = odd">
+                  <ion-card *ngIf="even" no-padding style="margin: 4% !important">
+                      <ion-button [color]=" item.wishflag=='1' ? 'warning' : 'primary'" class="buttonRight" size="small"
+                          (click)="addToWish(item.product_id,i)">
+                          <ion-icon [color]="item.wishflag=='1'? 'primary' : 'warning'" name="heart"></ion-icon>
+                      </ion-button>
+                      <div (click)="openProduct(i)">
+                          <ion-img class="img" [src]="item.product_image" draggable="false"></ion-img>
+                          <ion-card-content no-padding>
+                              <h6 class="color">{{item.product_name}}</h6>
+                              <div style="display: flex;">
+                                  <h6 class="priceproduct" color='primary'>{{item.product_price}} EGP</h6>
+                                  <ion-button style="padding-right: 5%;" size="small" color="primary" fill="clear"
+                                      (click)="addQty(i)" no-padding>
+                                      <ion-icon name="cart" slot="icon-only"></ion-icon>
+                                  </ion-button>
+                              </div>
+                          </ion-card-content>
+                      </div>
+
+                  </ion-card>
+              </ion-row>
+          </ion-col>
+      </ion-row>
+  </ion-grid>
+
+
+
+
+
+
+ 
+</ion-content>

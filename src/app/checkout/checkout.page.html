@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <div text-center>
+      <ion-title>Checkout</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+
+  
+
+  <div class="cart-items">
+    <ion-card mode="ios" *ngFor="let item of CartItem; let i = index">
+      <ion-card-content>
+        <div class="item-img">
+          <img style="border-radius: 5vw; " [src]="item.product_image" />
+        </div>
+
+        <div class="item-info">
+          <p>{{item.product_name}}</p>
+          <p>Lotto.LTD</p>
+          <p>{{item.price_all_qty}} RM</p>
+        </div>
+      </ion-card-content>
+
+      <ion-button size="small" color="primary" fill="clear" (click)="deleteitem(i)" class="floatingDel">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-card>
+
+  </div>
+
+  <div *ngIf="CartItem.length">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Address</ion-label>
+      <ion-input [value]="temouser.address" ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label> select the withdrawal time  </ion-label> 
+      <ion-datetime displayFormat="H:mm" display-timezone="utc"></ion-datetime>
+  </ion-item>
+
+  </div>
+
+  <br>
+  <br>
+  <br>
+
+  <div class="product-slider ion-padding-start" *ngIf="products.length > 0"  >
+    <div> Suggested books </div>
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let item of products; let i = index;">
+        
+        <ion-col>
+          <ion-button [color]="item.wishflag=='1'? 'warning' : 'primary'" class="buttonRight" size="small" (click)="addToWish(item.product_id,i,false)">
+            <ion-icon [color]="item.wishflag=='1'? 'primary' : 'warning'" name="heart"></ion-icon>
+          </ion-button>
+          <img (click)="openproduct2(i)" [src]="item.product_image"/>
+          <p>RM{{item.product_price}}</p>
+          <h6>{{item.product_name}}</h6>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+
+  </div>
+
+
+
+
+
+</ion-content>
+
+
+
+<ion-footer translucent="true" class="ion-no-border" mode="md">
+
+  <ion-button expand="block" class="main-button"  routerDirection="forward"
+  routerLink="/home">Back to home</ion-button>
+
+</ion-footer>

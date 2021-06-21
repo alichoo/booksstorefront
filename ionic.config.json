@@ -1,0 +1,7 @@
+{
+  "name": "404 gallery app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

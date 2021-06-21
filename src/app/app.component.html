@@ -1,0 +1,59 @@
+<ion-app>
+  <ion-split-pane>
+    <ion-menu>
+      <ion-header no-border>
+        <ion-toolbar text-center color='warningwarning-contrast' padding>
+          <div style="width: 100%; text-align: center;">
+            <div style="display: flex;object-fit: cover;vertical-align: middle;margin: auto !important; background-color:white;border-radius: 50%; width: 40vw; height: 40vw;box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.932), 0 6px 20px 0 rgb(255, 255, 255);">
+              <img src="../../assets/logoo.png" alt="" style="width: 40vw;">
+            </div>
+          </div>
+          <!-- <b >COLOR YOUR LIFE</b>-->
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <!-- of div => style="min-height: 100% !important;background-color: rgb(44, 44, 44) !important;" -->
+        <div>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item [routerDirection]="'forward'" [routerLink]="[p.url]" *ngFor="let p of appPages" color="none" lines="none">
+              <ion-label color='black'>
+                <ion-icon color='black' [name]="p.icon"></ion-icon>
+                {{p.title}}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-item color="none" lines="none" (click)="showCat = !showCat;">
+            <ion-label color='warning'>
+              <ion-icon color='warning' name="apps"></ion-icon>
+              Categories
+            </ion-label>
+          </ion-item>
+          <ion-menu-toggle>
+            <div *ngIf="showCat">
+              <ion-item *ngFor="let cat of categories; let i = index" (click)="openCategory(i)" style="margin-left:10%;"
+                color="none" lines="none">
+                <ion-label color='warning' style="text-transform: capitalize;">
+                  {{cat.cat_name}}
+                </ion-label>
+              </ion-item>
+            </div>
+            <ion-item [routerDirection]="'forward'" [routerLink]="[p.url]" *ngFor="let p of lastPages" color="none" lines="none">
+              <ion-label color='warning'>
+                <ion-icon color='warning' [name]="p.icon"></ion-icon>
+                {{p.title}}
+              </ion-label>
+            </ion-item >
+            <ion-item (click)="logout()" color="none" lines="none">
+              <ion-label color='warning'>
+                <ion-icon color='warning' name="exit"></ion-icon>
+                Exit
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </div>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+
+  </ion-split-pane>
+</ion-app>

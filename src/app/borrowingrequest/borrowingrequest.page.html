@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>borrowingrequest</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="12" size-sm="12" size-md="6" size-lg="4">
+
+      <ion-card mode="ios" *ngFor="let item of borrowed_books; let i = index">
+
+        <ion-item>
+          <div class="index" slot="start">
+            {{i+1}}
+          </div>
+
+          <ion-label>
+            <img [src]="item.product_image" style="height:100px;width: 100px;">
+            <h2>
+              <ion-text>
+                {{item.name}}
+              </ion-text>
+            </h2>
+            <p>
+              <ion-text>
+                Product Name: {{item.product_name}}
+              </ion-text>
+            </p>
+
+            <p>
+              <ion-text>
+                Borrowing Date: {{item.borrowing_date}}
+
+              </ion-text>
+            </p>
+            <p>
+              <ion-text>
+                Borrowing Status: {{item.borrowing_status}}
+
+              </ion-text>
+            </p>
+          </ion-label>
+          <div *ngIf="item.borrowing_status=='pending'">
+            <ion-button fill="clear" (click)="reject(item.book_borrowing_id)" color="danger" slot="end">
+              <ion-icon name="ios-trash"></ion-icon>
+            </ion-button>
+
+            <ion-button fill="clear" (click)="accept(item.book_borrowing_id)" color="danger">
+              <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline" color="secondary"
+                slot="end">
+              </ion-icon>
+            </ion-button>
+          </div>
+        </ion-item>
+
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+</ion-content>

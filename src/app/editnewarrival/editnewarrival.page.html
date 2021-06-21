@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-title>Edit Special and New Arrival</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col size="6" no-padding>
+        <ion-row *ngFor="let item of products; let i = index ;let even = even; let odd = odd">
+          <ion-card *ngIf="odd" no-padding style="margin: 4% !important">
+            <div>
+              <ion-img class="img" [src]="item.product_image" draggable="false"></ion-img>
+              <ion-card-content no-padding>
+                <h6 class="color">{{item.product_name}}</h6>
+                <div style="display: flex;">
+                  <h6 class="priceproduct" color='primary'>{{item.product_price}} EGP</h6>
+                </div>
+                <ion-button *ngIf="item.specialproduct!='1'" size="small" (click)="addSpecial(item.product_id,i)">
+                  Add to Special Product
+                </ion-button>
+                <ion-button *ngIf="item.specialproduct=='1'" size="small" (click)="removeSpecial(item.product_id,i)">
+                  Remove from Special Product
+                </ion-button>
+                <ion-button *ngIf="item.newarrvialproduct!='1'" size="small" (click)="addArrival(item.product_id,i)">
+                  Add to New Arrival
+                </ion-button>
+                <ion-button *ngIf="item.newarrvialproduct=='1'" size="small" (click)="removeArrival(item.product_id,i)">
+                  Remove from New Arrival
+                </ion-button>
+              </ion-card-content>
+            </div>
+          </ion-card>
+        </ion-row>
+      </ion-col>
+      <ion-col size="6" no-padding>
+        <ion-row *ngFor="let item of products; let i = index ;let even = even; let odd = odd">
+          <ion-card *ngIf="even" no-padding style="margin: 4% !important">
+            <div>
+              <ion-img class="img" [src]="item.product_image" draggable="false"></ion-img>
+              <ion-card-content no-padding>
+                <h6 class="color">{{item.product_name}}</h6>
+                <div style="display: flex;">
+                  <h6 class="priceproduct" color='primary'>{{item.product_price}} EGP</h6>
+                </div>
+                <ion-button *ngIf="item.specialproduct!='1'" size="small" (click)="addSpecial(item.product_id,i)">
+                  Add to Special Product
+                </ion-button>
+                <ion-button *ngIf="item.specialproduct=='1'" size="small" (click)="removeSpecial(item.product_id,i)">
+                  Remove from Special Product
+                </ion-button>
+                <ion-button *ngIf="item.newarrvialproduct!='1'" size="small" (click)="addArrival(item.product_id,i)">
+                  Add to New Arrival
+                </ion-button>
+                <ion-button *ngIf="item.newarrvialproduct=='1'" size="small" (click)="removeArrival(item.product_id,i)">
+                  Remove from New Arrival
+                </ion-button>
+              </ion-card-content>
+            </div>
+
+          </ion-card>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

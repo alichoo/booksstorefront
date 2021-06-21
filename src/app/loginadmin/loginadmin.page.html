@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <div text-center>
+    <ion-title>Login Admin</ion-title>
+  </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <section text-center margin-bottom padding>
+        <h1 style="font-size:1.4em" no-margin>Admin<br></h1>
+      </section>
+    <div text-center style="padding-top: 30%;">
+    <ion-card color='primary' >
+      <ion-item color='primary' >
+        <ion-label color='warning'  position="floating"><ion-icon name="mail" slot="start"></ion-icon>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="adminData.email"></ion-input>
+      </ion-item>
+      <ion-item class="ourscss" color='primary'>
+        <ion-label color='warning'  position="floating"><ion-icon name="lock" slot="start"></ion-icon>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="adminData.password"></ion-input>
+      </ion-item>
+    <ion-button (click)="onclicklog()" class="log"  color='warning' fill="outline" expand="block" >Log In</ion-button>
+  </ion-card>  
+</div>
+</ion-content>

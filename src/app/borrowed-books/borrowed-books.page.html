@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>borrowing Request</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <div class="cart-items">
+    <ion-card mode="ios" *ngFor="let item of borrowed_books; let i = index">
+      <ion-card-content>
+        <div class="item-img">
+          <img style="border-radius: 5vw; " [src]="item.product_image" />
+        </div>
+
+        <div class="item-info">
+          <h1>{{item.product_name}}</h1>
+          <h2>Borrowing Status: {{item.borrowing_status}} </h2>
+          <h2>Borrowing Date: {{item.borrowing_date}} </h2>
+        </div>
+      </ion-card-content>
+
+    </ion-card>
+
+  </div>
+</ion-content>

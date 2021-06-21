@@ -1,0 +1,49 @@
+.name{
+    font-weight: bold;
+}
+
+.buttonRight{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    margin-right: 0px !important;
+    --border-radius: 15px 0px 0px 15px !important;
+}
+.buttonLeft{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin-left: 0px !important;
+    --border-radius: 0px 15px 15px 0px !important;
+}
+.img {
+    width: 100%
+}
+.card {
+    // display: flex;
+    //flex-direction: column;
+    width: 100% !important;
+    height: 100% !important;
+     //margin: 0 !important;
+    display: inline-block;
+ }
+ .priceproduct{
+    padding: 0px 5%;
+    margin: auto;
+    flex: auto;
+    text-align: left;
+    font-family: Avantg;
+    color:var(--ion-color-primary);
+}
+.color{
+    padding: 0px 5%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    text-align: left;
+    font-family: Avantg;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    color: rgb(0, 0, 0);
+    text-transform: capitalize;
+}
