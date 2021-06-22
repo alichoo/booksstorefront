@@ -22,43 +22,34 @@
 
   <ion-item>
     <ion-label position="floating">Product Name</ion-label>
-    <ion-input type="text" [(ngModel)]="ProductData.product_name"></ion-input>
+    <ion-input  ngDefaultControl  type="text" [(ngModel)]="ProductData.product_name"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Product Category</ion-label>
-    <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="cat_id($event)">
-      <ion-select-option [(ngModel)]="ProductData.cat_id" *ngFor="let item of categories" value="{{item.cat_id}}">{{item.cat_name}}</ion-select-option>
+    <ion-select value="brown"  [(ngModel)]="ProductData.cat_id" ngDefaultControl okText="Okay" cancelText="Dismiss" (ionChange)="cat_id($event)">
+      <ion-select-option  *ngFor="let item of categories" value="{{item.cat_id}}">{{item.cat_name}}</ion-select-option>
     </ion-select>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Product Price</ion-label>
-    <ion-input type="text" [(ngModel)]="ProductData.product_price"></ion-input>
+    <ion-input   ngDefaultControl type="text" [(ngModel)]="ProductData.product_price"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Borrowing Price</ion-label>
-    <ion-input type="text" [(ngModel)]="ProductData.borrowing_price"></ion-input>
+    <ion-input   ngDefaultControl type="text" [(ngModel)]="ProductData.borrowing_price"></ion-input>
   </ion-item>
-  <ion-item>
-    <ion-label position="floating">Product standard size</ion-label>
-    <ion-input type="text" [(ngModel)]="ProductData.product_sizes"></ion-input>
-  </ion-item>
+   
 
-  <ion-item>
-    <ion-label position="floating">Product standard color</ion-label>
-    <ion-input type="text" [(ngModel)]="ProductData.product_colors"></ion-input>
-  </ion-item>
+  
 
-  <ion-item>
-    <ion-label position="floating">Product matrial</ion-label>
-    <ion-input type="text" [(ngModel)]="ProductData.product_material"></ion-input>
-  </ion-item>
+   
 
   <ion-item>
     <ion-label position="floating">Product description</ion-label>
-    <ion-textarea type="text" [(ngModel)]="ProductData.product_description"></ion-textarea>
+    <ion-textarea name="fieldName" ngDefaultControl type="text" [(ngModel)]="ProductData.product_description"></ion-textarea>
   </ion-item>
 
   <ion-button padding shape="round" expand="full" (click)="add_prod()" (click)="uploadImage()">add product</ion-button>

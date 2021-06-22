@@ -3,7 +3,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../auth-service.service';
-import { ToastController, NavController } from '@ionic/angular';
+import { ToastController, NavController, IonSlides } from '@ionic/angular';
 import { Crop } from '@ionic-native/crop/ngx';
 import { AngularCropperjsModule } from 'angular-cropperjs';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
@@ -139,10 +139,13 @@ this.authService.postDate(this.ProductData, 'addproduct').then((result) => {
   console.log(this.responseData);
   if (!this.responseData.error) {
     this.presentToast('added!');
+    this.goBack();
   } else {
+    console.log(this.responseData);
     this.presentToast(this.responseData.text);
   }
 }, (err) => {
+console.log(err);
   this.presentToast('Check your internet connection!');
 });
 }
@@ -192,5 +195,8 @@ this.authService.postDate(this.ProductData, 'addproduct').then((result) => {
   }
   goBack() {
     this.navCtrl.back();
+  }
+  changed(id) {
+    console.log(id);
   }
 }

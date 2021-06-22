@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from '../auth-service.service';
 
 @Component({
@@ -14,31 +14,48 @@ export class CheckoutPage implements OnInit {
   orderTotal: number;
   temouser: any;
   products: any = [];
+  user: any;
+  subdisabled: boolean;
+  discount: any = 0 ;
 
-  constructor(public authService: AuthService, public alertController: AlertController,public toastController: ToastController) { }
+  constructor(public authService: AuthService, private navCtrl: NavController,
+     public alertController: AlertController, public toastController: ToastController) { }
 
   ngOnInit() {
+    this.user = JSON.parse( localStorage.getItem('userData'));
+    this.authService.postDate(this.user, 'getmembership').then( (res: any) => {
+    let mm = [];
+        mm = res.member;
+   if (mm.length > 0) {
+     this.subdisabled = false;
+     this.discount = mm[0].discount;
+     console.log(this.discount);
+   } else {
+     this.subdisabled = true;
+     this.discount = null;
+   }
+    });
   }
 
   ionViewWillEnter() {
     this.reloadCat();
     this.temouser = JSON.parse(localStorage.getItem('userData'));
-    
+
   }
 
   reloadCat() {
     let temouser = null;
     try {
       temouser = JSON.parse(localStorage.getItem('userData'));
-    } catch{
-      temouser = null
+    } catch {
+      temouser = null;
     }
     if (temouser !== null) {
       this.userid = temouser.user_id;
       this.authService.postDate({ user_id: this.userid }, 'getcart').then((result) => {
         let responseData;
         responseData = result;
-        console.log(responseData)
+        console.log(responseData);
         if (!responseData.error) {
           this.CartItem = responseData.carts;
           if (this.CartItem.length > 0) {
@@ -51,11 +68,14 @@ export class CheckoutPage implements OnInit {
       });
     }
   }
+  goBack() {
+    this.navCtrl.back();
+  }
 
   sumall() {
     this.orderTotal = 0;
     for (let i = 0; i < this.CartItem.length; i++) {
-      this.orderTotal += parseInt(this.CartItem[i].price_all_qty);
+      this.orderTotal += parseInt(this.CartItem[i].price_all_qty)- (parseInt(this.CartItem[i].product_qty) * this.discount);
     }
   }
 
@@ -67,32 +87,35 @@ export class CheckoutPage implements OnInit {
     });
     toast.present();
   }
-
+  confirmcart() {
+    this.authService.postDate(this.user, 'confirmcart').then((result) => {
+      this.presentToast('Purchase done Successfully!!');
+    });
+  }
   orderConfirmed() {
     this.sugesst(this.CartItem[0].cat_id);
 
   if (this.CartItem.length >= 1) {
-    console.log(this.orderNote)
+    console.log(this.orderNote);
     this.authService.postDate({ order: this.CartItem, ordernote: this.orderNote }, 'sendEmailto404').then((result) => {
       let responseData;
       responseData = result;
-      console.log(responseData)
+      console.log(responseData);
       if (!responseData.error) {
         this.presentToast('Order Confirmed');
         this.orderTotal = 0;
         this.CartItem = [];
-        this.orderNote = "";
+        this.orderNote = '';
       }
     }, (err) => {
       this.presentToast('Check your internet connection!');
     });
-  }
-  else {
-    this.presentToast('please add at least one item to cart')
+  } else {
+    this.presentToast('please add at least one item to cart');
   }
 }
 
-sugesst(cat_id){
+sugesst(cat_id) {
   this.temouser = JSON.parse(localStorage.getItem('userData'));
   this.authService.postDate({ cat_id: cat_id, user_id: this.temouser.user_id }, 'getproductofcat').then((result) => {
     let responseData;

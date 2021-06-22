@@ -24,6 +24,7 @@ export class ProductDetailsPage implements OnInit {
   modal: any;
   subdisabled = true;
   user: any;
+  discount: any = null;
   constructor(private navCtrl: NavController,
      private router: Router,
      private modalCtrl: ModalController,
@@ -185,8 +186,11 @@ export class ProductDetailsPage implements OnInit {
         mm = res.member;
    if (mm.length > 0) {
      this.subdisabled = false;
+     this.discount = mm[0].discount;
+     console.log(this.discount);
    } else {
      this.subdisabled = true;
+     this.discount = null;
    }
     });
   }

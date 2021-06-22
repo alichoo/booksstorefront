@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
     <div text-center>
       <ion-title>Cart</ion-title>
     </div>
@@ -30,7 +33,7 @@
         <div class="item-info">
           <p>{{item.product_name}}</p>
           <p>Lotto.LTD</p>
-          <p>{{item.price_all_qty}} RM</p>
+          <p>{{item.price_all_qty - (item.product_qty * discount)}} RM</p>
 
           <div class="qty-selector">
             <ion-button fill="clear" (click)="minQty(i)">-</ion-button>

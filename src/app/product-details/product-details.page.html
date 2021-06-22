@@ -38,10 +38,13 @@
   <div class="ion-padding-vertical">
     <h1 class="item-name">{{productDetails.product_name}}</h1>
 
-    <h4 class="price">
-      {{productDetails.product_price * 0.9 | number: '1.0-0'}}   RM (-10%)
+    <h4 class="price" *ngIf="discount!=null">
+   discount:    {{productDetails.product_price - discount  | number: '1.0-0'}}   RM (-{{discount}} RM)
       <span class="real-price">{{productDetails.product_price}} RM</span>
     </h4>
+    <h4 class="price" *ngIf="discount==null">
+      {{productDetails.product_price  | number: '1.0-0'}}  RM
+          </h4>
     <p slot="start" class="fontOption">borrowing Price: <span class="real-price">{{productDetails.borrowing_price}} RM</span></p>
   </div>
 
