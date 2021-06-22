@@ -91,4 +91,24 @@ export class BorrowingrequestPage implements OnInit {
   goBack() {
     this.navCtrl.back();
   }
+  getbook(book_borrowing_id, product_qty) {
+    this.authService.postDate({ book_borrowing_id: book_borrowing_id, product_qty: product_qty }, 'returnproduct').then((result) => {
+      console.log(result);
+    }, (error) => {
+      console.error(error);
+    }
+      ).catch((err) => {
+      console.error(err);
+    });
+
+  }
+  async presentToast(messageToToast) {
+    const toast = await this.toastController.create({
+      message: messageToToast,
+      duration: 1500,
+      position: 'top'
+    });
+    toast.present();
+  }
+
 }

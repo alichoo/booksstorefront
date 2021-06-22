@@ -32,8 +32,9 @@
               <ion-text>
                 Borrowing Date: {{item.borrowing_date}}
 
-              </ion-text>
-            </p>
+              </ion-text></p>
+              <p>
+                <ion-text>Returning Date: {{item.borrowing_expected_return_date}} </ion-text></p>
             <p>
               <ion-text>
                 Borrowing Status: {{item.borrowing_status}}
@@ -51,6 +52,13 @@
                 slot="end">
               </ion-icon>
             </ion-button>
+          </div>
+          <div *ngIf="item.borrowing_status =='accepted'">
+            <ion-button fill="clear" (click)="getbook(item.book_borrowing_id,item.product_qty)" color="success" slot="end">
+              return book
+            </ion-button>
+
+             
           </div>
         </ion-item>
 

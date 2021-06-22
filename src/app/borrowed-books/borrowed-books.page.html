@@ -21,6 +21,9 @@
           <h1>{{item.product_name}}</h1>
           <h2>Borrowing Status: {{item.borrowing_status}} </h2>
           <h2>Borrowing Date: {{item.borrowing_date}} </h2>
+          <h2 *ngIf="item.borrowing_status!='finished'">Returning Date: {{item.borrowing_expected_return_date}} </h2>
+          <h2 *ngIf="item.borrowing_status=='finished'">Returned Date: {{item.borrowing_return_date}} </h2>
+     
         </div>
       </ion-card-content>
 

@@ -42,7 +42,7 @@ this.subdisabled = true;
     this.presentToast('Please Accept Conditions ');
   } else {
     if (!this.userData.ismember ) {
-  this.authService.postDate(this.userData, 'addmembership').then( (res) => { this.presentToast('Subscribed Successfully !!! '); 
+  this.authService.postDate(this.userData, 'addmembership').then( (res) => { this.presentToast('Subscribed Successfully !!! ');
   this.navCtrl.back(); });
     } else {
       this.presentToast('You are already a member');

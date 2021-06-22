@@ -13,8 +13,7 @@ import { Router } from '@angular/router';
 export class BorrowedBooksPage implements OnInit {
 
   borrowed_books = [];
-  cart = { 'product_id': '', 'product_color': '', 'product_size': '', 'user_id': '', 'product_qty': 1 };
-
+  cart: any = {};
   constructor(private navCtrl: NavController, private router: Router, private modalCtrl: ModalController,
     private route: ActivatedRoute,
      public toastController: ToastController,
@@ -28,11 +27,15 @@ export class BorrowedBooksPage implements OnInit {
 
 
   }
+  goBack() {
+    this.navCtrl.back();
+  }
 
 
   ngOnInit() {
     this.authService.postDate({ user_id: this.cart.user_id }, 'getborrowedbooksofsingleuser').then(( result: any) => {
       this.borrowed_books = result.data;
+      console.log(this.borrowed_books[0]);
     }, (error) => {
 
     });

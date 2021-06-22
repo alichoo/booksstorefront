@@ -17,60 +17,49 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
  })
 export class AddproductPage implements OnInit {
   base64Image: string;
-  ProductData = {
-    'product_id': '', 
-    'cat_id': '',
-     'product_name': '',
-     'product_photo': '',  
-     'product_price': '', 
-     'product_image': '', 
-     'product_colors': '', 
-     'product_sizes': '', 
-     'product_description': '',
-      'product_material': '',
-      'product_case': ''};
+  ProductData: any = {};
   responseData: any;
   categories: any;
   respData: any;
-  fileUrl: any=null;
-  photo_name=''
-  counters=0
-  
-  constructor(public camera:Camera ,
-    public navCtrl : NavController,
+  fileUrl: any = null;
+  photo_name = '';
+  counters = 0;
+
+  constructor(public camera: Camera ,
+    public navCtrl: NavController,
     public toastController: ToastController,
     public authService: AuthService ,
-    public http:HttpClient,
-    private crop:Crop,
+    public http: HttpClient,
+    private crop: Crop,
     public transfer: FileTransfer,
     public file: File,
-    public imagePicker: ImagePicker) { 
+    public imagePicker: ImagePicker) {
 
       this.authService.postDate({}, 'getproducts').then((result) => {
         let responseData;
         responseData = result;
-        console.log(responseData)
+        console.log(responseData);
         if (! responseData.error) {
-          this.counters=responseData.products.length+1;
-          console.log(this.counters)
+          this.counters = responseData.products.length + 1;
+          console.log(this.counters);
         }
       }, (err) => {
         this.presentToast('Check your internet connection!');
       });
      }
 
-    //methods
+    // methods
  async presentToast(messageToToast) {
   const toast = await this.toastController.create({
     message: messageToToast,
     duration: 1500,
     position: 'top'
   });
-  toast.present(); 
+  toast.present();
  }
 
 
- camphoto(){
+ camphoto() {
   const options: CameraOptions = {
     quality: 100,
     allowEdit: true,
@@ -78,10 +67,10 @@ export class AddproductPage implements OnInit {
     saveToPhotoAlbum: true,
     correctOrientation: true,
    // targetWidth:400,
-    //targetHeight:400,
+    // targetHeight:400,
     encodingType: this.camera.EncodingType.JPEG,
     destinationType: this.camera.DestinationType.DATA_URL
-    }
+    };
     this.camera.getPicture(options).then((imageData) => {
         // let filename = imageData.substring(imageData.lastIndexOf('/')+1);
         // let path =  imageData.substring(0,imageData.lastIndexOf('/')+1);
@@ -95,8 +84,8 @@ export class AddproductPage implements OnInit {
       quality: 70,
       destinationType: this.camera.DestinationType.DATA_URL,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      saveToPhotoAlbum:false
-    }
+      saveToPhotoAlbum: false
+    };
 
     this.camera.getPicture(options).then((imageData) => {
       this.base64Image = 'data:image/jpg;base64,' + imageData;
@@ -104,47 +93,47 @@ export class AddproductPage implements OnInit {
       // Handle error
     });
   }
-  
 
 
-  
 
-  uploadImage(){
+
+
+  uploadImage() {
     const fileTransfer: FileTransferObject = this.transfer.create();
-    console.log(this.counters)
-    //random int
-    var random = Math.floor(Math.random() * 100);
+    console.log(this.counters);
+    // random int
+    const random = Math.floor(Math.random() * 100);
    // this.photo_name="product_name" + this.counters + ".jpg";
-    //option transfer
-    let options: FileUploadOptions = {
+    // option transfer
+    const options: FileUploadOptions = {
       fileKey: 'file',
-      fileName: "" + this.ProductData.product_name + ".jpg",
+      fileName: '' + this.ProductData.product_name + '.jpg',
       chunkedMode: false,
       httpMethod: 'post',
-      mimeType: "image/jpg",
+      mimeType: 'image/jpg',
       headers: {}
-    }
-    //file transfer action
+    };
+    // file transfer action
     fileTransfer.upload(this.base64Image, 'https://msi-cs.com/404gallery/api/upload.php', options)
       .then((data) => {
-        console.log(data)
-        alert("Success");
-        this.ProductData.product_image=this.photo_name
-        //this.counters++;
-        
+        console.log(data);
+        alert('Success');
+        this.ProductData.product_image = this.photo_name;
+        // this.counters++;
+
       }, (err) => {
         console.log(err);
-        alert("Error");
+        alert('Error');
       });
   }
 
 
-cat_id(event){
-console.log(event)
-this.ProductData.cat_id=event.detail.value;
+cat_id(event) {
+console.log(event);
+this.ProductData.cat_id = event.detail.value;
 }
-add_prod(){
-console.log(this.ProductData)
+add_prod() {
+console.log(this.ProductData);
 this.authService.postDate(this.ProductData, 'addproduct').then((result) => {
   this.responseData = result;
   console.log(this.responseData);
@@ -172,7 +161,7 @@ this.authService.postDate(this.ProductData, 'addproduct').then((result) => {
                      fileKey: 'file',
                      fileName: this.base64Image.substr(this.base64Image.lastIndexOf('/') + 1)
                   };
-    
+
                   fileTransfer.upload(this.base64Image, 'https://msi-cs.com/404gallery/api/upload.php', uploadOpts)
                    .then((data) => {
                      console.log(data);
@@ -190,7 +179,7 @@ this.authService.postDate(this.ProductData, 'addproduct').then((result) => {
     }*/
 
   ngOnInit() {
-    
+
     this.authService.postDate({}, 'getcat').then((result) => {
       this.responseData = result;
       if (!this.responseData.error) {
@@ -201,7 +190,7 @@ this.authService.postDate(this.ProductData, 'addproduct').then((result) => {
       this.presentToast('Check your internet connection!');
     });
   }
-  goBack(){
+  goBack() {
     this.navCtrl.back();
   }
 }

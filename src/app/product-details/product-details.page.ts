@@ -5,6 +5,7 @@ import { ToastController, ModalController, AlertController, NavController } from
 import { AuthService } from '../auth-service.service';
 import { Router } from '@angular/router';
 import { setDOM } from '@angular/platform-browser/src/dom/dom_adapter';
+import { BorrowedBooksPage } from '../borrowed-books/borrowed-books.page';
 
 @Component({
   selector: 'app-product-details',
@@ -15,9 +16,10 @@ export class ProductDetailsPage implements OnInit {
   responseData: any;
   public def = 2;
   color: any;
+  borrowingdays: any;
   productDetails: any = {};
   userData = { 'name': '', 'password': '', 'email': '', 'phone': '', 'user_id': '' };
-  product = { 'product_name': '', 'product_id': '' };
+  product: any = {};
   cart = { 'product_id': '', 'product_color': '', 'product_size': '', 'user_id': '', 'product_qty': 1 };
   modal: any;
   subdisabled = true;
@@ -126,9 +128,18 @@ export class ProductDetailsPage implements OnInit {
     }
   }
   sendborrowbookrequest(product_id) {
-    console.log(product_id);
-    console.log( this.cart.user_id);
-    this.authService.postDate({ product_id: this.product.product_id, user_id: this.cart.user_id }, 'borrowingbooks').then((result: any) => {
+    this.product.product_qty = this.cart.product_qty;
+    const Borroweddays = new Date(this.borrowingdays);
+   // this.product.borrowingdays = Borroweddays.getDay() - 1;
+    const now = new Date().getTime();
+    const diff = now + (Borroweddays.getDay() - 1) * (60 * 60 * 1000 * 24);
+  // this.product.borrowingdays = new Date(diff);
+  this.product.borrowingdays = Borroweddays.getDay() - 1;
+  if (!isNaN(parseFloat( this.product.borrowingdays ))) {
+    console.log('ok ');
+    this.product.user_id = this.cart.user_id;
+    console.log( this.product);
+   this.authService.postDate(this.product, 'borrowingbooks').then((result: any) => {
       const responseData = result;
       this.presentToast(responseData.message);
 
@@ -138,10 +149,9 @@ export class ProductDetailsPage implements OnInit {
     }
 
     );
-
-
-
-
+  } else {
+    this.presentToast('Please Select borrowing days');
+  }
 
   }
     addqtyInCart(id) {
