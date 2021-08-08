@@ -39,13 +39,13 @@
     <h1 class="item-name">{{productDetails.product_name}}</h1>
 
     <h4 class="price" *ngIf="discount!=null">
-   discount:    {{productDetails.product_price - discount  | number: '1.0-0'}}   RM (-{{discount}} RM)
+   Price With  discount:    {{(productDetails.product_price - discount) * cart.product_qty | number: '1.0-2'}}   RM (-{{discount}} RM)
       <span class="real-price">{{productDetails.product_price}} RM</span>
     </h4>
     <h4 class="price" *ngIf="discount==null">
-      {{productDetails.product_price  | number: '1.0-0'}}  RM
+      Price: {{productDetails.product_price  | number: '1.0-0'}}  RM
           </h4>
-    <p slot="start" class="fontOption">borrowing Price: <span class="real-price">{{productDetails.borrowing_price}} RM</span></p>
+    <p slot="start" class="fontOption">borrowing Price: <span class="real-price">{{(totalbprice) * cart.product_qty | number: '1.0-2'}} RM  ({{productDetails.borrowing_price}} RM + {{asstax}} RM assurance tax)</span></p>
   </div>
 
   <div class="seperator">
@@ -70,8 +70,12 @@
   </div>
 
   <ion-item>
-    <p slot="start" >select days</p>
-      <ion-datetime [(ngModel)]="borrowingdays" disabled="false" dayValues="01,02,03" placeholder="select days" displayFormat="DD"></ion-datetime>
+    <p slot="start" >From Date:</p>
+      <ion-datetime [(ngModel)]="fromdate" disabled="false"   placeholder="select from date" (ionChange) = "mydate($event,fromdate)" min ={{today}} displayFormat="DD-MMM-YYYY"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <p slot="start" >To Date:</p>
+      <ion-datetime [(ngModel)]="todate" disabled="false"    placeholder="select to date" max={{maxdates}}  (ionChange) = "mydate($event,todate)"  min="{{fromdate}}" displayFormat="DD-MMM-YYYY"></ion-datetime>
   </ion-item>
   <div class="seperator">
     <hr>

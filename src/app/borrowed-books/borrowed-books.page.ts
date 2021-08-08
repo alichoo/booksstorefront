@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-borrowed-books',
   templateUrl: './borrowed-books.page.html',
   styleUrls: ['./borrowed-books.page.scss'],
-})
+ })
 export class BorrowedBooksPage implements OnInit {
 
   borrowed_books = [];

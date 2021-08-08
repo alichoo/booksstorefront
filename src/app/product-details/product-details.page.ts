@@ -14,6 +14,12 @@ import { BorrowedBooksPage } from '../borrowed-books/borrowed-books.page';
 })
 export class ProductDetailsPage implements OnInit {
   responseData: any;
+  asstax = 50;
+  fromdate: any;
+  todate: any ;
+  maxdate: Date = new Date();
+  maxdates: string = new Date().toISOString();
+  today: any = new Date().toISOString();
   public def = 2;
   color: any;
   borrowingdays: any;
@@ -25,6 +31,7 @@ export class ProductDetailsPage implements OnInit {
   subdisabled = true;
   user: any;
   discount: any = null;
+  totalbprice: any;
   constructor(private navCtrl: NavController,
      private router: Router,
      private modalCtrl: ModalController,
@@ -32,6 +39,7 @@ export class ProductDetailsPage implements OnInit {
       public toastController: ToastController,
       public authService: AuthService,
       private alertController: AlertController) {
+        // this.today  date.setDate(date.getDate() + days);
     this.route.params.subscribe(params => {
       this.product.product_name = params['product_name'];
       this.product.product_id = params['product_id'];
@@ -43,7 +51,7 @@ export class ProductDetailsPage implements OnInit {
           // this.productDetails.product_colors = JSON.parse(this.productDetails.product_colors)
           // this.productDetails.product_sizes = JSON.parse(this.productDetails.product_sizes)
           this.cart.product_id = this.productDetails.product_id;
-
+         this. totalbprice =  parseFloat(this.productDetails.borrowing_price) + this.asstax;
           // this.cart.product_color = this.productDetails.product_colors[0];
           // this.cart.product_size = this.productDetails.product_sizes[0];
           const temouser = JSON.parse(localStorage.getItem('userData'));
@@ -54,6 +62,22 @@ export class ProductDetailsPage implements OnInit {
       });
     });
   }
+  mydate($event, todate) {
+
+    const days = 3;
+    this.maxdate = new Date (this.fromdate);
+    this.maxdate = this.addDays(this.maxdate, days - 1);
+    this.maxdates = new Date(this.maxdate).toISOString();
+    if (!(new Date(this.fromdate).getTime() <= new Date(this.todate).getTime()) ||
+    !((new Date(this.todate).getTime() - new Date(this.fromdate).getTime()) <= (days ) * (1000 * 60 * 60 * 24) )
+    ) {
+      this.presentToast('To Date must be GREATER or EQUAL From Date or borrowings days must be  less than 3 days ');
+    }
+  }
+  addDays(date: Date, days: number): Date {
+    date.setDate(date.getDate() + days);
+    return date;
+}
   findProductInCart() {
     const userDataTemp = JSON.parse(localStorage.getItem('userData'));
     if (userDataTemp === null) {
@@ -131,12 +155,15 @@ export class ProductDetailsPage implements OnInit {
   sendborrowbookrequest(product_id) {
     this.product.product_qty = this.cart.product_qty;
     const Borroweddays = new Date(this.borrowingdays);
+
    // this.product.borrowingdays = Borroweddays.getDay() - 1;
     const now = new Date().getTime();
     const diff = now + (Borroweddays.getDay() - 1) * (60 * 60 * 1000 * 24);
   // this.product.borrowingdays = new Date(diff);
-  this.product.borrowingdays = Borroweddays.getDay() - 1;
-  if (!isNaN(parseFloat( this.product.borrowingdays ))) {
+  this.product.fromdate = this.fromdate;
+  this.product.todate = this.todate;
+  if (new Date(this.fromdate).getTime() <= new Date(this.todate).getTime() &&
+   ((new Date(this.todate).getTime() - new Date(this.fromdate).getTime()) <= 3 * (1000 * 60 * 60 * 24) )) {
     console.log('ok ');
     this.product.user_id = this.cart.user_id;
     console.log( this.product);
@@ -151,7 +178,7 @@ export class ProductDetailsPage implements OnInit {
 
     );
   } else {
-    this.presentToast('Please Select borrowing days');
+    this.presentToast('To Date must be GREATER or EQUAL From Date');
   }
 
   }
