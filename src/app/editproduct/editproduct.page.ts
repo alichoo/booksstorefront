@@ -39,14 +39,15 @@ export class EditproductPage implements OnInit {
     public imagePicker: ImagePicker,
     private router: Router,
     private route: ActivatedRoute) {
-
+      
       this.route.params.subscribe(params => {
         this.ProductData.product_name = params['product_name'];
         this.ProductData.product_id = params['product_id'];
         this.ProductData.product_price = params['product_price'];
-        this.ProductData.product_colors = params['product_color'];
-        this.ProductData.product_sizes = params['product_size'];
-        this.ProductData.product_material = params['product_material'];
+        this.ProductData.borrowing_price = params['borrowing_price'];
+        // this.ProductData.product_colors = params['product_color'];
+        // this.ProductData.product_sizes = params['product_size'];
+        // this.ProductData.product_material = params['product_material'];
         this.ProductData.cat_id = params['cat_id'];
         this.ProductData.product_image = params['product_image'];
         this.ProductData.product_description = params['product_description'];
@@ -141,7 +142,7 @@ export class EditproductPage implements OnInit {
           headers: {}
         };
         // file transfer action
-        fileTransfer.upload(this.base64Image, 'https://msi-cs.com/404gallery/api/upload.php', options)
+        fileTransfer.upload(this.base64Image, 'http://localhost/PHP-Slim-Restful/api/uploaduser.php', options)
           .then((data) => {
             console.log(data);
             alert('Success');
@@ -188,4 +189,6 @@ export class EditproductPage implements OnInit {
   goBack() {
     this.navCtrl.back();
   }
+
+  
 }

@@ -37,10 +37,11 @@ export class ProductPage implements OnInit {
       this.router.navigate(['/editproduct', { product_id: this.product[index].product_id ,
          product_name : this.product[index].product_name,
          product_price : this.product[index].product_price,
-         product_material : this.product[index].product_material,
-         product_color : this.product[index].product_colors,
+         borrowing_price : this.product[index].borrowing_price,
+        //  product_material : this.product[index].product_material,
+        //  product_color : this.product[index].product_colors,
          product_description : this.product[index].product_description,
-         product_size : this.product[index].product_sizes,
+        //  product_size : this.product[index].product_sizes,
          cat_id : this.product[index].cat_id,
          product_image : this.product[index].product_image
         }]);

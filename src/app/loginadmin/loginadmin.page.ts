@@ -22,7 +22,7 @@ export class LoginadminPage implements OnInit {
          console.log(this.responseData);
         if(!this.responseData.error){
          this.presentToast('Login Successfully!');
-      //    localStorage.setItem('adminData', JSON.stringify(this.responseData.adminData));
+         localStorage.setItem('adminData', JSON.stringify(this.responseData.adminData));
          this.navCtrl.navigateForward('/admin');
         } else{
            this.presentToast(this.responseData.text);

@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <section text-center margin-bottom padding>
+  <!-- <section text-center margin-bottom padding>
     <h1 style="font-size:1.4em" no-margin>Welcome,admin <br></h1>
   </section>
 
@@ -28,7 +28,7 @@
     <ion-row>
       <ion-col col-6>
         <ion-card text-center padding color="primary" (click)="navtoborrowing()">
-          <h5>Check Request Borrowing</h5>
+          <h5>Check Borrowing Request </h5>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -53,16 +53,58 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <!-- </ion-row>
-  <ion-col col-6 >
-      <ion-card text-center padding color="primary"(click)="navtoorders()">
-        <h5>orders</h5>
-      </ion-card>
-    </ion-col>
-  <ion-row> -->
+
+  </ion-grid> -->
 
 
-
+  <section text-center margin-bottom>
+    <ion-icon name="person"></ion-icon>
+    <h1 style="font-size:1.4em" no-margin>Welcome, <br>
+      admin</h1>
+  </section>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card text-center padding (click)="navtocat()">
+          <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+          <h2>Categories</h2>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card text-center padding color="primary" (click)="navtoproduct()">
+          <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+          <h2>Product</h2>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card text-center padding color="primary" (click)="navtoborrowing()">
+          <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+          <h2>Check Borrowing Request</h2>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card text-center padding (click)="navtonewarrival()">
+          <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+          <h2>New Arrival</h2>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card text-center padding (click)="navtoslide()">
+          <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+          <h2>Slides</h2>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+          <ion-card text-center padding color="primary" (click)="navtoabout()">
+            <ion-icon ios="ios-arrow-dropleft-circle" md="md-arrow-dropleft-circle"></ion-icon>
+            <h2>About Us</h2>
+          </ion-card>
+        </ion-col>
+    </ion-row>
   </ion-grid>
 
 </ion-content>

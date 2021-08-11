@@ -21,7 +21,7 @@ export class EditnewarrivalPage implements OnInit {
         this.products = responseData.products;
       }
     }, (err) => {
-      this.presentToast('Check your internet connection!');
+      this.presentToast('Check your 1 internet connection!');
     });
   }
   async presentToast(messageToToast) {
@@ -45,7 +45,7 @@ export class EditnewarrivalPage implements OnInit {
         this.products[i].specialproduct = '1';
       }
     }, (err) => {
-      this.presentToast('Check your internet connection!');
+      this.presentToast('Check your 2 internet connection!');
     });
   }
   removeSpecial(producID, i) {
@@ -56,7 +56,7 @@ export class EditnewarrivalPage implements OnInit {
         this.products[i].specialproduct = '0';
       }
     }, (err) => {
-      this.presentToast('Check your internet connection!');
+      this.presentToast('Check your 3 internet connection!');
     });
   }
   addArrival(producID, i) {
@@ -67,7 +67,7 @@ export class EditnewarrivalPage implements OnInit {
         this.products[i].newarrvialproduct = '1';
       }
     }, (err) => {
-      this.presentToast('Check your internet connection!');
+      this.presentToast('Check your 4 internet connection!');
     });
   }
   removeArrival(producID, i) {
@@ -78,7 +78,7 @@ export class EditnewarrivalPage implements OnInit {
         this.products[i].newarrvialproduct = '0';
       }
     }, (err) => {
-      this.presentToast('Check your internet connection!');
+      this.presentToast('Check your 5 internet connection!');
     });
   }
 }

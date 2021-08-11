@@ -88,9 +88,7 @@ export class BorrowingrequestPage implements OnInit {
 
     await alert.present();
   }
-  goBack() {
-    this.navCtrl.back();
-  }
+ 
   getbook(book_borrowing_id, product_qty) {
     this.authService.postDate({ book_borrowing_id: book_borrowing_id, product_qty: product_qty }, 'returnproduct').then((result) => {
       console.log(result);
@@ -109,6 +107,10 @@ export class BorrowingrequestPage implements OnInit {
       position: 'top'
     });
     toast.present();
+  }
+
+  goBack() {
+    this.navCtrl.back();
   }
 
 }

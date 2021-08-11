@@ -1,49 +1,57 @@
-.name{
-    font-weight: bold;
-}
-
-.buttonRight{
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    margin-right: 0px !important;
-    --border-radius: 15px 0px 0px 15px !important;
-}
-.buttonLeft{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    margin-left: 0px !important;
-    --border-radius: 0px 15px 15px 0px !important;
-}
-.img {
-    width: 100%
-}
 .card {
-    // display: flex;
-    //flex-direction: column;
-    width: 100% !important;
-    height: 100% !important;
-     //margin: 0 !important;
-    display: inline-block;
- }
- .priceproduct{
-    padding: 0px 5%;
-    margin: auto;
-    flex: auto;
-    text-align: left;
-    font-family: Avantg;
-    color:var(--ion-color-primary);
-}
-.color{
-    padding: 0px 5%;
-    overflow:hidden;
-    text-overflow: ellipsis;
-    white-space:nowrap;
-    text-align: left;
-    font-family: Avantg;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    color: rgb(0, 0, 0);
-    text-transform: capitalize;
-}
+    width: 100%;
+    padding: 1.6rem 2rem;
+    background: #f3f3f3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    border-radius: 2.5rem;
+    margin-bottom: 1.5rem;
+  
+    .card-content {
+      text-align: center;
+  
+      .title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 0.2rem;
+        color: #1d1d1d;
+      }
+  
+      .subtitle {
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: #ffb800;
+        margin-top: 0;
+  
+        sup {
+          font-size: 1rem;
+          margin-right: 2px;
+          color: #ffb800;
+        }
+      }
+  
+
+      ion-buttons {
+        position: absolute;
+        bottom: -1rem;
+        left: 50%;
+        transform: translateX(-50%);
+  
+        ion-button {
+          --background: #6b45bc;
+          font-weight: 700;
+          color: #fff;
+          width: 30px;
+          height: 30px;
+          --padding-start: 0;
+          --padding-end: 0;
+          --padding-top: 0;
+          --padding-bottom: 0;
+
+          
+        }
+      }
+    }
+  }

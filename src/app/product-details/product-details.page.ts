@@ -39,7 +39,7 @@ export class ProductDetailsPage implements OnInit {
       public toastController: ToastController,
       public authService: AuthService,
       private alertController: AlertController) {
-        // this.today  date.setDate(date.getDate() + days);
+      // this.today = new Date().toISOString();
     this.route.params.subscribe(params => {
       this.product.product_name = params['product_name'];
       this.product.product_id = params['product_id'];
@@ -51,7 +51,7 @@ export class ProductDetailsPage implements OnInit {
           // this.productDetails.product_colors = JSON.parse(this.productDetails.product_colors)
           // this.productDetails.product_sizes = JSON.parse(this.productDetails.product_sizes)
           this.cart.product_id = this.productDetails.product_id;
-         this. totalbprice =  parseFloat(this.productDetails.borrowing_price) + this.asstax;
+          this. totalbprice =  parseFloat(this.productDetails.borrowing_price) + this.asstax;
           // this.cart.product_color = this.productDetails.product_colors[0];
           // this.cart.product_size = this.productDetails.product_sizes[0];
           const temouser = JSON.parse(localStorage.getItem('userData'));
@@ -182,7 +182,7 @@ export class ProductDetailsPage implements OnInit {
   }
 
   }
-    addqtyInCart(id) {
+       addqtyInCart(id) {
       const userDataTemp = JSON.parse(localStorage.getItem('userData'));
     if (userDataTemp === null) {
       this.router.navigate(['/']);

@@ -46,14 +46,62 @@
     </ion-item>
     <ion-item>
       <ion-label> select the withdrawal time  </ion-label> 
-      <ion-datetime displayFormat="H:mm" display-timezone="utc"></ion-datetime>
+      <ion-datetime displayFormat="HH:m" display-timezone="utc" [(ngModel)]="delivtime"></ion-datetime>
   </ion-item>
-
+  <ion-item>
+    <ion-label> Select Payment Method  </ion-label> 
+  <ion-select [(ngModel)]="pmethod" name="pmethod" 
+  multiple="false" placeholder="Tap to select.."  
+  (ionChange)="mSelected()" required >
+        <ion-select-option   value="CoD">
+         Cash on Delevery
+        </ion-select-option>
+        <ion-select-option   value="stripe">
+          Stripe
+         </ion-select-option>
+  </ion-select>
+  </ion-item>
+  <div *ngIf="pmethod && pmethod=='stripe'">
+    <hr>
+    <ion-item>
+      <ion-label position="fixed">Card Number</ion-label>
+      <ion-input type="number"  [(ngModel)]="ncard"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">CVV</ion-label>
+      <ion-input  type="number"  [(ngModel)]="cvv"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label> Expiry Date  </ion-label> 
+      <ion-datetime displayFormat="MMM-YYYY" [(ngModel)]="expdate" display-timezone="utc"></ion-datetime>
+      
+  </ion-item>
+  <ion-button color="primary"   size="small" (click)="paystripe()">Pay</ion-button>
+       
+  <hr>
+  </div>
   </div>
 
   <br>
   <br>
   <br>
+
+  <div class="product-slider ion-padding-start">
+    
+    <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
+      <ion-slide *ngFor="let item of products; let i = index;">
+        
+        <ion-col>
+          <ion-button [color]="item.wishflag=='1'? 'warning' : 'primary'" class="buttonRight" size="small" (click)="addToWish(item.product_id,i,false)">
+            <ion-icon [color]="item.wishflag=='1'? 'primary' : 'warning'" name="heart"></ion-icon>
+          </ion-button>
+          <img (click)="openProduct(item.product_id,item.product_name)" [src]="item.product_image"/>
+          <p>RM{{item.product_price}}</p>
+          <h6>{{item.product_name}}</h6>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+  </div>
 
 
 
@@ -66,9 +114,8 @@
 
 
 <ion-footer translucent="true" class="ion-no-border" mode="md">
-  <ion-button expand="block" color="success" (click)="confirmcart()" routerDirection="forward"
-  routerLink="/">Confirm Order</ion-button>
-  <ion-button expand="block" class="main-button"  routerDirection="forward"
-  routerLink="/tabs/cart">Back to Cart</ion-button>
+  <ion-button expand="block" color="success" [disabled]="!payed" (click)="confirmcart()" routerDirection="forward"
+  >Confirm Order</ion-button>
+  <ion-button expand="block" class="main-button"  routerDirection="forward" routerLink="/">Back to Cart</ion-button>
 
 </ion-footer>

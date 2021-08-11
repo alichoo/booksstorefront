@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color='primary'>
-    <ion-title>Edit Special and New Arrival</ion-title>
+    <ion-title>New Arrival</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
     </ion-buttons>
@@ -20,12 +20,12 @@
                 <div style="display: flex;">
                   <h6 class="priceproduct" color='primary'>{{item.product_price}} EGP</h6>
                 </div>
-                <ion-button *ngIf="item.specialproduct!='1'" size="small" (click)="addSpecial(item.product_id,i)">
+                <!-- <ion-button *ngIf="item.specialproduct!='1'" size="small" (click)="addSpecial(item.product_id,i)">
                   Add to Special Product
                 </ion-button>
                 <ion-button *ngIf="item.specialproduct=='1'" size="small" (click)="removeSpecial(item.product_id,i)">
                   Remove from Special Product
-                </ion-button>
+                </ion-button> -->
                 <ion-button *ngIf="item.newarrvialproduct!='1'" size="small" (click)="addArrival(item.product_id,i)">
                   Add to New Arrival
                 </ion-button>
@@ -47,12 +47,12 @@
                 <div style="display: flex;">
                   <h6 class="priceproduct" color='primary'>{{item.product_price}} EGP</h6>
                 </div>
-                <ion-button *ngIf="item.specialproduct!='1'" size="small" (click)="addSpecial(item.product_id,i)">
+                <!-- <ion-button *ngIf="item.specialproduct!='1'" size="small" (click)="addSpecial(item.product_id,i)">
                   Add to Special Product
-                </ion-button>
-                <ion-button *ngIf="item.specialproduct=='1'" size="small" (click)="removeSpecial(item.product_id,i)">
+                </ion-button> -->
+                <!-- <ion-button *ngIf="item.specialproduct=='1'" size="small" (click)="removeSpecial(item.product_id,i)">
                   Remove from Special Product
-                </ion-button>
+                </ion-button> -->
                 <ion-button *ngIf="item.newarrvialproduct!='1'" size="small" (click)="addArrival(item.product_id,i)">
                   Add to New Arrival
                 </ion-button>

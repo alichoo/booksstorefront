@@ -6,4 +6,57 @@
 
 <ion-content>
 
+  <ion-row>
+
+  <ion-col size="6" no-padding>
+  <ion-row *ngFor="let item of products; let i = index ;let even = even; let odd = odd">
+    
+  <div class="card" *ngIf="odd" no-padding style="margin: 4% !important">
+    <ion-img [src]="item.product_image"></ion-img>
+  
+    <div (click)="openProduct(i)">
+       <div class="card-content">
+          <h3 class="title">{{item.product_name}}</h3>
+          <h2 class="subtitle"><sup>$</sup>{{item.product_price}} RM</h2>
+  
+            <ion-buttons slot="start">
+           <ion-button [color]=" item.wishflag=='1' ? 'warning' : 'primary'" class="buttonRight" size="small"
+                            (click)="addToWish(item.product_id,i)">
+                            <ion-icon [color]="item.wishflag=='1'? 'primary' : 'warning'" name="heart"></ion-icon>
+                        </ion-button>
+           </ion-buttons>
+        </div>
+     </div>
+  </div>
+
+</ion-row>
+ </ion-col>
+
+ <ion-col size="6" no-padding>
+  <ion-row *ngFor="let item of products; let i = index ;let even = even; let odd = odd">
+    
+  <div class="card" *ngIf="even" no-padding style="margin: 4% !important">
+    <ion-img [src]="item.product_image"></ion-img>
+  
+    <div (click)="openProduct(i)">
+       <div class="card-content">
+          <h3 class="title">{{item.product_name}}</h3>
+          <h2 class="subtitle"><sup>$</sup>{{item.product_price}} RM</h2>
+  
+            <ion-buttons slot="start">
+           <ion-button [color]=" item.wishflag=='1' ? 'warning' : 'primary'" class="buttonRight" size="small"
+                            (click)="addToWish(item.product_id,i)">
+                            <ion-icon [color]="item.wishflag=='1'? 'primary' : 'warning'" name="heart"></ion-icon>
+                        </ion-button>
+           </ion-buttons>
+        </div>
+     </div>
+  </div>
+
+</ion-row>
+ </ion-col>
+
+
+
+ </ion-row>
 </ion-content>

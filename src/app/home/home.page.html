@@ -72,7 +72,7 @@
 </div>
 
 
-  <div class="category-slider ion-padding-start">
+  <div class="category-slider ion-padding-start" >
     <ion-slides [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
       <ion-slide *ngFor="let item of categories; let i = index;" size="4" (click)="openCategory(i)">
         <ion-col>
@@ -88,7 +88,7 @@
 
   <div class="title ion-padding">
     <h2 class="font-bold">New Arrivals</h2>
-    <p>See all</p>
+   
   </div>
 
   <div class="product-slider ion-padding-start">
@@ -97,8 +97,8 @@
       <ion-slide *ngFor="let item of product; let i = index;">
         
         <ion-col>
-          <ion-button [color]="item.wishflag=='1'? 'warning' : 'primary'" class="buttonRight" size="small" (click)="addToWish(item.product_id,i,false)">
-            <ion-icon [color]="item.wishflag=='1'? 'primary' : 'warning'" name="heart"></ion-icon>
+          <ion-button [color]="item.wishflag=='1'? 'text' : 'danger'" class="buttonRight" size="small" (click)="addToWish(item.product_id,i,false)">
+            <ion-icon [color]="item.wishflag=='1'? 'danger' : 'primary'" name="heart"></ion-icon>
           </ion-button>
           <img (click)="openproduct2(i)" [src]="item.product_image"/>
           <p>RM{{item.product_price}}</p>

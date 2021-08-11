@@ -122,7 +122,6 @@ export class HomePage {
     }, (err) => {
       this.presentToast('Check your internet connection!');
     });
-   // window.location.href = 'https://www.instagram.com/404gallery/';
   }
 
   openProduct(producID, producName) {
@@ -172,16 +171,16 @@ export class HomePage {
     }, (err) => {
       this.presentToast('Check your internet connection!');
     });
-    this.authService.postDate({ user_id: this.temouser.user_id }, 'specialpieces').then((result) => {
-      let responseData;
-      responseData = result;
-      console.log(responseData);
-      if (!responseData.error) {
-        this.special = responseData.carts;
-      }
-    }, (err) => {
-      this.presentToast('Check your internet connection!');
-    });
+    // this.authService.postDate({ user_id: this.temouser.user_id }, 'specialpieces').then((result) => {
+    //   let responseData;
+    //   responseData = result;
+    //   console.log(responseData);
+    //   if (!responseData.error) {
+    //     this.special = responseData.carts;
+    //   }
+    // }, (err) => {
+    //   this.presentToast('Check your internet connection!');
+    // });
 
   }
 
@@ -199,7 +198,7 @@ export class HomePage {
               this.special[i].wishflag = '1';
           }
         }, (err) => {
-          this.presentToast('Check your internet connection!');
+          this.presentToast('Check your 1 internet connection!');
         });
       } else {
         this.authService.postDate({ product_id: producID, user_id: this.temouser.user_id}, 'delWish').then((result: any) => {
@@ -209,7 +208,7 @@ export class HomePage {
               this.special[i].wishflag = '0';
           }
         }, (err) => {
-          this.presentToast('Check your internet connection!');
+          this.presentToast('Check your 2 internet connection!');
         });
       }
     } else {
@@ -221,7 +220,7 @@ export class HomePage {
             this.product[i].wishflag = '1';
           }
         }, (err) => {
-          this.presentToast('Check your internet connection!');
+          this.presentToast('Check your 3 internet connection!');
         });
       } else {
         this.authService.postDate({ product_id: producID, user_id: this.temouser.user_id}, 'delWish').then((result: any) => {
@@ -231,7 +230,7 @@ export class HomePage {
             this.product[i].wishflag = '0';
           }
         }, (err) => {
-          this.presentToast('Check your internet connection!');
+          this.presentToast('Check your 4 internet connection!');
         });
       }
     }
