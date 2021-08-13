@@ -32,7 +32,7 @@ export class CheckoutPage implements OnInit {
      public alertController: AlertController,
       public toastController: ToastController,
       private stripe: Stripe) {
-        this.stripe.setPublishableKey('my_publishable_key');
+        this.stripe.setPublishableKey('pk_test_VTWWfYGS2Mc211sFFz3uwUJt');
       }
 
   ngOnInit() {
@@ -174,7 +174,7 @@ paystripe() {
     const expd = new Date(this.expdate);
     const card = {
       number: this.ncard,
-      expMonth: expd.getMonth(),
+      expMonth: expd.getMonth() + 1,
       expYear: expd.getFullYear(),
       cvc: '220'
      };
