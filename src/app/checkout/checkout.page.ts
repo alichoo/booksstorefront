@@ -10,7 +10,7 @@ import { Stripe } from '@ionic-native/stripe/ngx';
   styleUrls: ['./checkout.page.scss'],
 })
 export class CheckoutPage implements OnInit {
-  delivtime: any;
+  delivtime: any = new Date().toISOString();
   cvv: any;
   ncard: any;
   expdate: any;
@@ -32,7 +32,8 @@ export class CheckoutPage implements OnInit {
      public alertController: AlertController,
       public toastController: ToastController,
       private stripe: Stripe) {
-        this.stripe.setPublishableKey('pk_test_VTWWfYGS2Mc211sFFz3uwUJt');
+        this.stripe.setPublishableKey('pk_test_51JNonFLt0g7AUZkx2BCQrO8pFJsbjUJc0N4JJ9azcj4AOzC7E' +
+        'JuMsM2651zU4EBGcHlF8p6uc7hQ3qdcJkDKfEiU009fEd2seD');
       }
 
   ngOnInit() {
@@ -114,6 +115,11 @@ if (this.pmethod && this.pmethod === 'stripe') {
   }
   confirmcart() {
     if (this.payed && this.delivtime) {
+      let payid = '';
+      if (this.pmethod === 'stripe') {
+  payid = 'Payment ID: ' + localStorage.getItem('Payedid');
+      }
+      this.user.note = payid;
     this.authService.postDate(this.user, 'confirmcart').then((result) => {
       this.presentToast('Purchase done Successfully!!');
       this.router.navigate(['/']);
@@ -180,8 +186,24 @@ paystripe() {
      };
      this.stripe.createCardToken(card)
         .then(token => {console.log(token.id);
-          this.presentToast('Paymenent Succeded !! Token N°:' + token.id);
-          this.payed = true;
+          this.presentToast('ِCard Verified Token N°:' + token.id);
+          this.authService.postDate({  user_id: this.temouser.user_id ,
+            email: this.temouser.email,
+            amount: this.orderTotal,
+             token:  token.id,
+            descr: 'Pay Cart ' + new Date() }, '/stripepay')
+          .then((resp: any) => {
+            if (resp.error) {
+            this.presentToast('ِPayment Fail: ' + resp.message);
+            this.pmethod = 'CoD';
+          this.payed = false;
+          } else {
+            this.presentToast('ِPayment Succeded id: ' + resp.message.id);
+            localStorage.setItem('Payedid', resp.message.id);
+            this.payed = true;
+          }
+            console.log(resp);
+          });
         })
         .catch(error => {console.error(error);
           this.presentToast('' + error.type + ':' + error.message );

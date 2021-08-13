@@ -25,6 +25,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { LoginPageModule } from './login/login.module';
 import { SignupPageModule } from './signup/signup.module';
 import { Stripe } from '@ionic-native/stripe/ngx';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,6 +53,7 @@ import { Stripe } from '@ionic-native/stripe/ngx';
     File,
     ImagePicker,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     ImagePicker
   ],
   bootstrap: [AppComponent]

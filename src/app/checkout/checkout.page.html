@@ -51,7 +51,7 @@
   <ion-item>
     <ion-label> Select Payment Method  </ion-label> 
   <ion-select [(ngModel)]="pmethod" name="pmethod" 
-  multiple="false" placeholder="Tap to select.."  
+  multiple="false" [disabled]='payed' placeholder="Tap to select.."  
   (ionChange)="mSelected()" required >
         <ion-select-option   value="CoD">
          Cash on Delevery
@@ -61,7 +61,7 @@
          </ion-select-option>
   </ion-select>
   </ion-item>
-  <div *ngIf="pmethod && pmethod=='stripe'">
+  <div *ngIf="pmethod && pmethod=='stripe' && !payed">
     <hr>
     <ion-item>
       <ion-label position="fixed">Card Number</ion-label>
@@ -73,10 +73,10 @@
     </ion-item>
     <ion-item>
       <ion-label> Expiry Date  </ion-label> 
-      <ion-datetime displayFormat="MMM-YYYY" [(ngModel)]="expdate" display-timezone="utc"></ion-datetime>
+      <ion-datetime displayFormat="MMM-YYYY" max="2199-10-31" [(ngModel)]="expdate"></ion-datetime>
       
   </ion-item>
-  <ion-button color="primary"[disabled] ="!(this.ncard && this.cvv && this.expdate)"  size="large" (click)="paystripe()">Pay</ion-button>
+  <ion-button color="primary"[disabled] ="!(this.ncard && this.cvv && this.expdate) || payed"  size="large" (click)="paystripe()">Pay</ion-button>
        
   <hr>
   </div>
