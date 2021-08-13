@@ -184,7 +184,7 @@ paystripe() {
           this.payed = true;
         })
         .catch(error => {console.error(error);
-          this.presentToast('Error: ' + error);
+          this.presentToast('' + error.type + ':' + error.message );
           this.pmethod = 'CoD';
           this.payed = false ;
         });
