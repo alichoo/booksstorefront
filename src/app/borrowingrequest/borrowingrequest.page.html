@@ -46,6 +46,12 @@
 
               </ion-text>
             </p>
+            <p>
+              <ion-text>
+                Borrowed Copies: {{item.product_qty}}
+
+              </ion-text>
+            </p>
           </ion-label>
           <div *ngIf="item.borrowing_status=='pending'">
             <ion-button fill="clear" (click)="reject(item.book_borrowing_id)" color="danger" slot="end">
@@ -62,11 +68,24 @@
             <ion-button fill="clear" (click)="getbook(item.book_borrowing_id,item.product_qty)" color="success" slot="end">
               return book
             </ion-button>
-
-             
           </div>
+         
         </ion-item>
-
+        <ion-item *ngIf="item.borrowing_status =='returned' && item.borrowing_deposit_tax>0 ">
+         
+          <ion-label>Deposit Tax</ion-label>
+          <ion-input [(ngModel)]="item.borrowing_deposit_tax" ></ion-input>
+        
+          <ion-button fill="clear" [disabled]="item.borrowing_deposit_tax<=0" (click)="getdeposit(item.book_borrowing_id,item.borrowing_deposit_tax)" color="success" slot="end">
+            return deposit  
+          </ion-button>
+        
+        </ion-item>
+        <ion-item *ngIf="item.borrowing_status =='accepted'">
+          <ion-button fill="clear" (click)="getbook(item.book_borrowing_id,item.product_qty)" color="success" slot="end">
+            return book
+          </ion-button>
+        </ion-item>
       </ion-card>
 
     </ion-col>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from '../auth-service.service';
+import { Stripe } from '@ionic-native/stripe/ngx';
 
 @Component({
   selector: 'app-checkout',
@@ -25,8 +26,14 @@ export class CheckoutPage implements OnInit {
   discount: any = 0 ;
   payed = false;
 
-  constructor(public authService: AuthService, private navCtrl: NavController, private router: Router,
-     public alertController: AlertController, public toastController: ToastController) { }
+  constructor(public authService: AuthService,
+              private navCtrl: NavController,
+               private router: Router,
+     public alertController: AlertController,
+      public toastController: ToastController,
+      private stripe: Stripe) {
+        this.stripe.setPublishableKey('my_publishable_key');
+      }
 
   ngOnInit() {
     this.user = JSON.parse( localStorage.getItem('userData'));
@@ -164,10 +171,23 @@ addToWish(item , i, text) {
 }
 paystripe() {
   if (this.ncard && this.cvv && this.expdate) {
-
-    // put backend script here
-    this.presentToast('Paymenent Succeded !!');
-    this.payed = true;
+    const expd = new Date(this.expdate);
+    const card = {
+      number: this.ncard,
+      expMonth: expd.getMonth(),
+      expYear: expd.getFullYear(),
+      cvc: '220'
+     };
+     this.stripe.createCardToken(card)
+        .then(token => {console.log(token.id);
+          this.presentToast('Paymenent Succeded !! Token N°:' + token.id);
+          this.payed = true;
+        })
+        .catch(error => {console.error(error);
+          this.presentToast('Error: ' + error);
+          this.pmethod = 'CoD';
+          this.payed = false ;
+        });
   } else {
     this.presentToast('Please check informations !!');
     this.payed = false ;

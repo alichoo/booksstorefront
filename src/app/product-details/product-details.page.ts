@@ -155,6 +155,7 @@ export class ProductDetailsPage implements OnInit {
   sendborrowbookrequest(product_id) {
     this.product.product_qty = this.cart.product_qty;
     const Borroweddays = new Date(this.borrowingdays);
+    this.product.borrowing_deposit_tax = (this.asstax ) *  this.cart.product_qty;
 
    // this.product.borrowingdays = Borroweddays.getDay() - 1;
     const now = new Date().getTime();

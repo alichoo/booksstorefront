@@ -24,6 +24,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 
 import { LoginPageModule } from './login/login.module';
 import { SignupPageModule } from './signup/signup.module';
+import { Stripe } from '@ionic-native/stripe/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -46,6 +47,7 @@ import { SignupPageModule } from './signup/signup.module';
     AuthService,
     Camera,
     Crop,
+    Stripe,
     FileTransfer,
     File,
     ImagePicker,

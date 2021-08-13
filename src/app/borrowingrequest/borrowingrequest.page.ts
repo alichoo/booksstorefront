@@ -88,8 +88,20 @@ export class BorrowingrequestPage implements OnInit {
 
     await alert.present();
   }
- 
-  getbook(book_borrowing_id, product_qty) {
+
+  async getbook(book_borrowing_id, product_qty) {
+    const alert = await this.alertCtrl.create({
+      header : 'confirming Accept',
+      message : 'are you sure to Return the Book?',
+      mode : 'ios',
+      buttons : [
+        {
+          text : 'No',
+          role : 'cancle'
+        },
+        {
+          text : 'Yes',
+          handler : () => {
     this.authService.postDate({ book_borrowing_id: book_borrowing_id, product_qty: product_qty }, 'returnproduct').then((result) => {
       console.log(result);
     }, (error) => {
@@ -98,7 +110,11 @@ export class BorrowingrequestPage implements OnInit {
       ).catch((err) => {
       console.error(err);
     });
-
+  }
+}
+]
+});
+await alert.present();
   }
   async presentToast(messageToToast) {
     const toast = await this.toastController.create({
@@ -112,5 +128,32 @@ export class BorrowingrequestPage implements OnInit {
   goBack() {
     this.navCtrl.back();
   }
-
+  async getdeposit(book_borrowing_id, borrowing_deposit_tax) {
+    const alert = await this.alertCtrl.create({
+      header : 'confirming Accept',
+      message : 'are you sure to Return the deposit tax? <br>' + borrowing_deposit_tax + ' RM',
+      mode : 'ios',
+      buttons : [
+        {
+          text : 'No',
+          role : 'cancle'
+        },
+        {
+          text : 'Yes',
+          handler : () => {
+    this.authService.postDate({ book_borrowing_id: book_borrowing_id, borrowing_deposit_tax:
+       borrowing_deposit_tax }, 'returndeposit').then((result) => {
+      console.log(result);
+    }, (error) => {
+      console.error(error);
+    }
+      ).catch((err) => {
+      console.error(err);
+    });
+  }
+}
+]
+});
+await alert.present();
+  }
 }

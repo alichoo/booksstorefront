@@ -69,14 +69,14 @@
     </ion-item>
     <ion-item>
       <ion-label position="fixed">CVV</ion-label>
-      <ion-input  type="number"  [(ngModel)]="cvv"></ion-input>
+      <ion-input  type="password"  [(ngModel)]="cvv"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label> Expiry Date  </ion-label> 
       <ion-datetime displayFormat="MMM-YYYY" [(ngModel)]="expdate" display-timezone="utc"></ion-datetime>
       
   </ion-item>
-  <ion-button color="primary"   size="small" (click)="paystripe()">Pay</ion-button>
+  <ion-button color="primary"[disabled] ="!(this.ncard && this.cvv && this.expdate)"  size="large" (click)="paystripe()">Pay</ion-button>
        
   <hr>
   </div>
