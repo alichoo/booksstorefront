@@ -182,7 +182,7 @@ paystripe() {
       number: this.ncard,
       expMonth: expd.getMonth() + 1,
       expYear: expd.getFullYear(),
-      cvc: '220'
+      cvc: this.cvv
      };
      this.stripe.createCardToken(card)
         .then(token => {console.log(token.id);
@@ -196,7 +196,6 @@ paystripe() {
             if (resp.error) {
             this.presentToast('ِPayment Fail: ' + resp.message);
             this.pmethod = 'CoD';
-          this.payed = false;
           } else {
             this.presentToast('ِPayment Succeded id: ' + resp.message.id);
             localStorage.setItem('Payedid', resp.message.id);
