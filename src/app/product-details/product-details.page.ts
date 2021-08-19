@@ -6,6 +6,7 @@ import { AuthService } from '../auth-service.service';
 import { Router } from '@angular/router';
 import { setDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 import { BorrowedBooksPage } from '../borrowed-books/borrowed-books.page';
+import { Stripe } from '@ionic-native/stripe/ngx';
 
 @Component({
   selector: 'app-product-details',
@@ -14,6 +15,11 @@ import { BorrowedBooksPage } from '../borrowed-books/borrowed-books.page';
 })
 export class ProductDetailsPage implements OnInit {
   responseData: any;
+  pmethod: any;
+  ncard: any;
+  cvv: any;
+  expdate: any;
+  payed = false;
   asstax = 50;
   fromdate: any;
   todate: any ;
@@ -32,13 +38,17 @@ export class ProductDetailsPage implements OnInit {
   user: any;
   discount: any = null;
   totalbprice: any;
+  orderTotal: any;
   constructor(private navCtrl: NavController,
      private router: Router,
      private modalCtrl: ModalController,
       private route: ActivatedRoute,
       public toastController: ToastController,
       public authService: AuthService,
-      private alertController: AlertController) {
+      private alertController: AlertController,
+      private stripe: Stripe) {
+        this.stripe.setPublishableKey('pk_test_51JNonFLt0g7AUZkx2BCQrO8pFJsbjUJc0N4JJ9azcj4AOzC7E' +
+        'JuMsM2651zU4EBGcHlF8p6uc7hQ3qdcJkDKfEiU009fEd2seD');
       // this.today = new Date().toISOString();
     this.route.params.subscribe(params => {
       this.product.product_name = params['product_name'];
@@ -158,6 +168,8 @@ export class ProductDetailsPage implements OnInit {
     this.product.borrowing_deposit_tax = (this.asstax ) *  this.cart.product_qty;
 
    // this.product.borrowingdays = Borroweddays.getDay() - 1;
+   this.product.pmethod = this.pmethod;
+   this.product.payed = this.payed;
     const now = new Date().getTime();
     const diff = now + (Borroweddays.getDay() - 1) * (60 * 60 * 1000 * 24);
   // this.product.borrowingdays = new Date(diff);
@@ -276,6 +288,55 @@ export class ProductDetailsPage implements OnInit {
   //   });
   //   await alert.present();
   // }
+paystripe() {
+  if (this.ncard && this.cvv && this.expdate) {
+    this.orderTotal = this.totalbprice * this.cart.product_qty;
+    const expd = new Date(this.expdate);
+    const card = {
+      number: this.ncard,
+      expMonth: expd.getMonth() + 1,
+      expYear: expd.getFullYear(),
+      cvc: this.cvv
+     };
+     this.stripe.createCardToken(card)
+        .then(token => {console.log(token.id);
+          this.presentToast('ِCard Verified Token N°:' + token.id);
+          this.authService.postDate({  user_id: this.user.user_id ,
+            email: this.user.email,
+            amount: this.orderTotal,
+             token:  token.id,
+            descr: 'Pay Cart ' + new Date() }, '/stripepay')
+          .then((resp: any) => {
+            if (resp.error) {
+            this.presentToast('ِPayment Fail: ' + resp.message);
+            this.pmethod = 'CoD';
+          } else {
+            this.presentToast('ِPayment Succeded id: ' + resp.message.id);
+            localStorage.setItem('Payedid', resp.message.id);
+            this.payed = true;
+          }
+            console.log(resp);
+          });
+        })
+        .catch(error => {console.error(error);
+          this.presentToast('' + error.type + ':' + error.message );
+          this.pmethod = 'CoD';
+          this.payed = false ;
+        });
+  } else {
+    this.presentToast('Please check informations !!');
+    this.payed = false ;
+  }
+
+}
+mSelected() {
+  if (this.pmethod && this.pmethod === 'CoD') {
+  this.payed = true;
+  }
+  if (this.pmethod && this.pmethod === 'stripe') {
+    this.payed = false;
+    }
+    }
   async presentToast(messageToToast) {
     const toast = await this.toastController.create({
       message: messageToToast,

@@ -11,6 +11,7 @@ import { Stripe } from '@ionic-native/stripe/ngx';
 })
 export class CheckoutPage implements OnInit {
   delivtime: any = new Date().toISOString();
+  today: any = new Date().toISOString();
   cvv: any;
   ncard: any;
   expdate: any;
@@ -122,7 +123,7 @@ if (this.pmethod && this.pmethod === 'stripe') {
       this.user.note = payid;
     this.authService.postDate(this.user, 'confirmcart').then((result) => {
       this.presentToast('Purchase done Successfully!!');
-      this.router.navigate(['/']);
+     // this.router.navigate(['/']);
     });
   } else {
     this.presentToast('Please check informations !!');

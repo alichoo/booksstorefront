@@ -52,6 +52,16 @@
 
               </ion-text>
             </p>
+            <p>
+              <ion-text *ngIf="item.pay_status == 1">
+                Payment : {{item.pmethod}} (Payed)
+
+              </ion-text>
+              <ion-text *ngIf="item.pay_status == 0">
+                Payment : {{item.pmethod}} (Not Payed)
+
+              </ion-text>
+            </p>
           </ion-label>
           <div *ngIf="item.borrowing_status=='pending'">
             <ion-button fill="clear" (click)="reject(item.book_borrowing_id)" color="danger" slot="end">
