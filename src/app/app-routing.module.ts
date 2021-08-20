@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'productlist', loadChildren: './productlist/productlist.module#ProductlistPageModule' },
   { path: 'product-details', loadChildren: './product-details/product-details.module#ProductDetailsPageModule' },
+  { path: 'borowingsendrequest', loadChildren: './borowingsendrequest/borowingsendrequest.module#BorowingsendrequestPageModule' },
   { path: 'slides', loadChildren: './slides/slides.module#SlidesPageModule' },
   { path: 'category', loadChildren: './category/category.module#CategoryPageModule' },
   { path: 'product', loadChildren: './product/product.module#ProductPageModule' },

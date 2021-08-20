@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title no-padding>
+      Borrowing with Stripe 
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager="true" class="product-slider">
+    <ion-slide>
+      <ion-img [src]="productDetails.product_image"></ion-img>
+    </ion-slide>
+  </ion-slides>
+  <div class="ion-padding-vertical">
+    <h1 class="item-name">{{productDetails.product_name}}</h1>
+<h4> borrowing Quantity: {{cart.product_qty}}</h4>
+     <h5>From: {{fromdate  | date:'yyyy-MM-dd'}} To: {{todate  | date:'yyyy-MM-dd'}}</h5>
+    <p slot="start" class="fontOption">borrowing Price: <span class="real-price">{{(totalbprice) * cart.product_qty | number: '1.0-2'}} RM  ({{productDetails.borrowing_price}} RM + {{asstax}} RM assurance tax)</span></p>
+  </div>
+ <h1>Stripe Payment: </h1>
+  <hr> 
+  <div>
+    <hr>
+    <ion-item>
+      <ion-label position="fixed">Card Number</ion-label>
+      <ion-input autocomplete="new-password" type="number" [readonly] ='payed' [(ngModel)]="ncard"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="fixed">CVV</ion-label>
+      <ion-input autocomplete="new-password"  [readonly] ='payed' type="password"  [(ngModel)]="cvv"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label> Expiry Date  </ion-label> 
+      <ion-datetime displayFormat="MMM-YYYY" [disabled] ='payed' min={{today}} max="2199-10-31" [(ngModel)]="expdate"></ion-datetime>
+      
+  </ion-item>
+  <ion-button color="primary"[disabled] ="!(this.ncard && this.cvv && this.expdate) || payed"  size="large" (click)="paystripe()">Pay</ion-button>
+       
+  <hr>
+  </div>
+  <div class="seperator">
+    <hr>
+  </div>
+
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+
+
+  <div class="seperator">
+    <hr>
+  </div>
+
+
+
+</ion-content>
+<ion-footer>
+  <ion-row>
+    
+    <ion-col size="12">
+      <ion-button expand="full"   [disabled]="!payed  "  (click)="sendborrowbookrequest(productDetails.product_id)">Send Request</ion-button>
+      
+    </ion-col>
+    
+  </ion-row>
+</ion-footer>

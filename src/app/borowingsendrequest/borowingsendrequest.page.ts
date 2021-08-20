@@ -9,11 +9,11 @@ import { BorrowedBooksPage } from '../borrowed-books/borrowed-books.page';
 import { Stripe } from '@ionic-native/stripe/ngx';
 
 @Component({
-  selector: 'app-product-details',
-  templateUrl: './product-details.page.html',
-  styleUrls: ['./product-details.page.scss'],
+  selector: 'app-borowingsendrequest',
+  templateUrl: './borowingsendrequest.page.html',
+  styleUrls: ['./borowingsendrequest.page.scss'],
 })
-export class ProductDetailsPage implements OnInit {
+export class BorowingsendrequestPage implements OnInit {
   responseData: any;
   pmethod: any;
   ncard: any;
@@ -51,8 +51,12 @@ export class ProductDetailsPage implements OnInit {
         'JuMsM2651zU4EBGcHlF8p6uc7hQ3qdcJkDKfEiU009fEd2seD');
       // this.today = new Date().toISOString();
     this.route.params.subscribe(params => {
-      this.product.product_name = params['product_name'];
+    this.product.product_name = params['product_name'];
       this.product.product_id = params['product_id'];
+      this.cart.product_qty = params['product_qty'];
+      this.pmethod = 'stripe';
+      this.fromdate = params['fromdate'];
+      this.todate = params['todate'];
       this.authService.postDate({ product_id: this.product.product_id }, 'getproducdetails').then((result) => {
         let responseData;
         responseData = result;
@@ -163,7 +167,6 @@ export class ProductDetailsPage implements OnInit {
     }
   }
   sendborrowbookrequest(product_id) {
-    if (this.pmethod === 'CoD') {
     this.product.product_qty = this.cart.product_qty;
     const Borroweddays = new Date(this.borrowingdays);
     this.product.borrowing_deposit_tax = (this.asstax ) *  this.cart.product_qty;
@@ -184,6 +187,7 @@ export class ProductDetailsPage implements OnInit {
    this.authService.postDate(this.product, 'borrowingbooks').then((result: any) => {
       const responseData = result;
       this.presentToast(responseData.message);
+     this.router.navigate(['/borrowed-books']);
 
 
     }, (err) => {
@@ -194,11 +198,7 @@ export class ProductDetailsPage implements OnInit {
   } else {
     this.presentToast('To Date must be GREATER or EQUAL From Date');
   }
-} else {
-  this.router.navigate(['/borowingsendrequest',
-     { product_id: this.product.product_id, product_name: this.product.product_name, product_qty: this.cart.product_qty,
-      fromdate: this.fromdate, todate: this.todate }]);
-}
+
   }
        addqtyInCart(id) {
       const userDataTemp = JSON.parse(localStorage.getItem('userData'));
